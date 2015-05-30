@@ -1,4 +1,4 @@
-package jarvis.mahan.jarvis_android;
+package jarvis.mahan.jarvisandroid;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
