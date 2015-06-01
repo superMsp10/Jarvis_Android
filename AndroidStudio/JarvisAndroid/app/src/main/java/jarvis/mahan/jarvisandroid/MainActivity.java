@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
     private void changeToCalender() {
 
         Intent intent;
-        intent =  new Intent(this,Hub.class);
+        intent =  new Intent(this,Calender.class);
         startActivity(intent);
 
     }

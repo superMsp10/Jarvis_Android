@@ -27,7 +27,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="jarvis.mahan.jarvisandroid.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".Calender"
+            android:label="@string/title_activity_calender"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="jarvis.mahan.jarvisandroid.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
