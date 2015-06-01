@@ -29,15 +29,30 @@ public class MainActivity extends ActionBarActivity {
        bullDog_logoPicture = getResources().getDrawable(R.drawable.bulldogimage);
        logoPicture = (ImageView)findViewById(R.id.imageView);
 
-        final Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button hubButton = (Button) findViewById(R.id.tohubButton);
+        hubButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                changeToHub();
+            }
+        });
+
+        final Button calenderButton = (Button) findViewById(R.id.calenderButton);
+        calenderButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeToCalender();
             }
         });
     }
 
     private void changeToHub() {
+
+        Intent intent;
+        intent =  new Intent(this,Hub.class);
+        startActivity(intent);
+
+    }
+
+    private void changeToCalender() {
 
         Intent intent;
         intent =  new Intent(this,Hub.class);
