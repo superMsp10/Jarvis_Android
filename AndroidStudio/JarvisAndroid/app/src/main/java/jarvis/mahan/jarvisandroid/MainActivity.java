@@ -1,29 +1,49 @@
 package jarvis.mahan.jarvisandroid;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-
-import static jarvis.mahan.jarvisandroid.R.drawable.bulldogimage;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private ImageView logoPicture;
-    private Drawable temp_logoPicture;
-    boolean changedLogo = false;
+    private Drawable lady_logoPicture;
+    private Drawable bullDog_logoPicture;
+
+    private boolean changedLogo = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        logoPicture = (ImageView) findViewById(R.id.imageView);
+
+
+       lady_logoPicture = getResources().getDrawable(R.drawable.capture);
+       bullDog_logoPicture = getResources().getDrawable(R.drawable.bulldogimage);
+       logoPicture = (ImageView)findViewById(R.id.imageView);
+
+        final Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               changeToHub();
+            }
+        });
     }
 
+    private void changeToHub() {
 
+        Intent intent;
+        intent =  new Intent(this,Hub.class);
+        startActivity(intent);
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -40,9 +60,8 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            openSettings();
             return true;
-        }else if(id == R.id.action_search){
+        } else if (id == R.id.action_search) {
 
             openSearch();
             return true;
@@ -51,22 +70,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void openSettings() {
-
-    }
 
     private void openSearch() {
-        if(!changedLogo) {
-            temp_logoPicture = logoPicture.getDrawable();
-            logoPicture.setImageResource(bulldogimage);
+        if (!changedLogo) {
+            logoPicture.setImageDrawable(bullDog_logoPicture);
             changedLogo = true;
-        }else{
-            logoPicture.setImageDrawable(temp_logoPicture);
-            temp_logoPicture = getDrawable(bulldogimage);
+        } else {
+            logoPicture.setImageDrawable(lady_logoPicture);
+
             changedLogo = false;
-
-
         }
 
-            }
+    }
 }
