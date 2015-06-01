@@ -1,18 +1,26 @@
 package jarvis.mahan.jarvisandroid;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import static jarvis.mahan.jarvisandroid.R.drawable.bulldogimage;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private ImageView logoPicture;
+    private Drawable temp_logoPicture;
+    boolean changedLogo = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        logoPicture = (ImageView) findViewById(R.id.imageView);
     }
 
 
@@ -48,6 +56,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void openSearch() {
-        Log.i("hi", "HI");
-    }
+        if(!changedLogo) {
+            temp_logoPicture = logoPicture.getDrawable();
+            logoPicture.setImageResource(bulldogimage);
+            changedLogo = true;
+        }else{
+            logoPicture.setImageDrawable(temp_logoPicture);
+            temp_logoPicture = getDrawable(bulldogimage);
+            changedLogo = false;
+
+
+        }
+
+            }
 }
