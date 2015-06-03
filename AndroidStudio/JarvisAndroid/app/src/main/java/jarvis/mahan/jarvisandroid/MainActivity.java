@@ -42,12 +42,29 @@ public class MainActivity extends ActionBarActivity {
                 changeToCalender();
             }
         });
+
+        final Button cafeButton = (Button) findViewById(R.id.CafeMenuButton);
+        cafeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeToCafeMenu();
+            }
+        });
+
+
     }
 
     private void changeToHub() {
 
         Intent intent;
         intent =  new Intent(this,Hub.class);
+        startActivity(intent);
+
+    }
+
+    private void changeToCafeMenu() {
+
+        Intent intent;
+        intent =  new Intent(this,CafeMenu.class);
         startActivity(intent);
 
     }
