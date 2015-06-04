@@ -17,73 +17,150 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:singleLine="true" />
 
-    <ListView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/wednesdayList"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/cafemenuTitle"
-        android:layout_alignEnd="@+id/cafemenuTitle" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/linearLayout">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Wednesday&apos;s Menu"
-        android:id="@+id/wednesdayMenuTitle"
-        android:layout_above="@+id/wednesdayList"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="25dp"
-        android:textColor="#ff000bff" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Friday&apos;s Menu"
+            android:id="@+id/fridayMenuTitle"
+            android:textSize="25dp"
+            android:textColor="#ff000bff"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/cafemenuTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <ListView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/thursdayMenu"
-        android:layout_above="@+id/wednesdayMenuTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/wednesdayList"
-        android:layout_alignEnd="@+id/wednesdayList" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Chicken $5"
+            android:id="@+id/fridaymanuList"
+            android:textSize="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Thursday&apos;s Menu"
-        android:id="@+id/thursdayMenuTitle"
-        android:layout_alignParentStart="true"
-        android:textSize="25dp"
-        android:textColor="#ff000bff"
-        android:layout_above="@+id/thursdayMenu"
-        android:layout_alignParentLeft="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/supList"
+            android:textSize="20dp" />
 
-    <ListView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/fridayMenu"
-        android:layout_above="@+id/thursdayMenuTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="26dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView4"
+            android:textSize="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Friday&apos;s Menu"
-        android:id="@+id/fridayMenuTitle"
-        android:layout_alignParentStart="true"
-        android:textSize="25dp"
-        android:textColor="#ff000bff"
-        android:layout_above="@+id/fridayMenu"
-        android:layout_alignParentLeft="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Thursday&apos;s Menu"
+            android:id="@+id/textView3"
+            android:textSize="25dp"
+            android:textColor="#ff000bff"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/cafemenuTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView5"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView6"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView7"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView8"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Wednesday&apos;s Menu"
+            android:id="@+id/wednesdayMenuTitle"
+            android:textSize="25dp"
+            android:textColor="#ff000bff"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_column="0"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView9"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView10"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView11"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Soup $5"
+            android:id="@+id/textView12"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Chicken $5"
+            android:id="@+id/textView13"
+            android:textSize="20dp" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -12,7 +12,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="HUB"
         android:id="@+id/hubTitle"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:singleLine="true" />
 
     <ImageView
         android:layout_width="100dp"
@@ -31,16 +32,19 @@
         android:text="JCI Student Council Twitter"
         android:id="@+id/jarvisTwitterIconTittle"
         android:layout_below="@+id/twitterIcon"
-        android:textSize="12dp" />
+        android:textSize="12dp"
+        android:singleLine="true" />
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/fbIcon"
         android:src="@drawable/faceicon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/twitterIcon"
-        android:layout_alignRight="@+id/hubTitle"
-        android:layout_alignEnd="@+id/hubTitle" />
+        android:layout_marginLeft="00dp"
+        android:layout_alignLeft="@+id/jAppIcon" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,17 +54,19 @@
         android:id="@+id/fbIconTitle"
         android:textSize="12dp"
         android:layout_below="@+id/fbIcon"
-        android:layout_alignRight="@+id/hubTitle" />
+        android:layout_alignRight="@+id/hubTitle"
+        android:singleLine="true" />
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/webIcon"
         android:src="@drawable/webicon"
-        android:layout_below="@+id/jarvisTwitterIconTittle"
+        android:layout_marginTop="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="99dp" />
+        android:layout_alignRight="@+id/twitterIcon"
+        android:layout_below="@+id/twitterIcon" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,7 +77,8 @@
         android:textSize="12dp"
         android:layout_below="@+id/webIcon"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:singleLine="true" />
 
     <ImageView
         android:layout_width="100dp"
@@ -90,6 +97,7 @@
         android:id="@+id/jarvisAppIconTitle"
         android:textSize="12dp"
         android:layout_below="@+id/jAppIcon"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:singleLine="true" />
 
 </RelativeLayout>
