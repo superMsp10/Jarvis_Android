@@ -53,7 +53,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CafeMenu"
+        android:text="Cafeteria Menu"
         android:id="@+id/CafeMenuButton"
         android:layout_above="@+id/calenderButton"
         android:layout_alignParentLeft="true"
