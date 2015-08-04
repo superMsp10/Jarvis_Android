@@ -37,9 +37,11 @@
                 android:value="jarvis.mahan.jarvisandroid.MainActivity" />
         </activity>
         <activity
+
             android:name=".CafeMenu"
             android:label="@string/title_activity_cafe_menu"
-            android:parentActivityName=".MainActivity" >
+            android:theme="@style/CustomActionBarTheme"
+        android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="jarvis.mahan.jarvisandroid.MainActivity" />
