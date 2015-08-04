@@ -1,22 +1,22 @@
 package jarvis.mahan.jarvisandroid;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -33,12 +33,34 @@ public class MainActivity extends ActionBarActivity {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.primary));
         }
-
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/Roboto-RobotoCondensed.ttf")
+                        .setDefaultFontPath("Capsuula.ttf")
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
+
+        setTitle("Jarvis");
+        Point size = new Point();
+        int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        Button cafe = (Button)findViewById(R.id.CafeMenuButton);
+        cafe.getLayoutParams().height = displayHeight / 6;
+
+        Button hub = (Button)findViewById(R.id.tohubButton);
+        hub.getLayoutParams().height = displayHeight / 6;
+
+        Button news = (Button)findViewById(R.id.NewsFeed);
+        news.getLayoutParams().height = displayHeight / 6;
+
+        Button calendar = (Button)findViewById(R.id.calenderButton);
+        calendar.getLayoutParams().height = displayHeight / 6;
+
+        TextView text = (TextView)findViewById(R.id.welcomLabel);
+        text.getLayoutParams().height = (displayHeight / 6)/3;
+        text = (TextView)findViewById(R.id.dateLabel);
+        text.getLayoutParams().height = (displayHeight / 6)/3;
+        text = (TextView)findViewById(R.id.dayAndPeriodLabel);
+        text.getLayoutParams().height = (displayHeight / 6)/3;
+
 
         final Button hubButton = (Button) findViewById(R.id.tohubButton);
         hubButton.setOnClickListener(new View.OnClickListener() {
@@ -88,24 +110,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
 

@@ -15,10 +15,18 @@
     <style name="MyActionBar"
         parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/primary</item>
+        <item name="android:titleTextStyle">@style/TitleBarTextColor</item>
+
 
         <!-- Support library compatibility -->
+        <item name="titleTextStyle">@style/TitleBarTextColor</item>
         <item name="background">@color/primary</item>
     </style>
 
+    <style name="TitleBarTextColor" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">36dp</item>
+
+
+    </style>
 
 </resources>
