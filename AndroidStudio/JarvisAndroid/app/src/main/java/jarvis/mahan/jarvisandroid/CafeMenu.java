@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -31,8 +32,9 @@ public class CafeMenu extends AppCompatActivity {
         );
         setTitle("Cafeteria Menu");
 
-        Point size = new Point();
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+
+
     }
 
 
@@ -53,4 +55,6 @@ public class CafeMenu extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

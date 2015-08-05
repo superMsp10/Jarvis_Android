@@ -125,9 +125,11 @@ tools:context=".MainActivity">
         android:id="@+id/dayAndPeriodLabel"
         android:layout_below="@+id/dateLabel"
         android:layout_centerHorizontal="true"
-        android:textSize="25sp"
+        android:textSize="48sp"
         android:textColor="#ffffffff"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:singleLine="false"
+        android:lines="2" />
 
 
 </RelativeLayout>
