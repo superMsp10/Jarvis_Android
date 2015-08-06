@@ -3,12 +3,12 @@ package jarvis.mahan.jarvisandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +21,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Array;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://jarvisapp-supermsp10.rhcloud.com";
+        String url ="http://jarvisapp-supermsp10.rhcloud.com/CafeMenu";
 
 
     // Request a string response from the provided URL.
@@ -85,8 +91,20 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response.substring(0,5));
+                        JSONArray res;
+
+
+                        try {
+                             res = new JSONArray(response);
+                            JSONObject j = res.getJSONObject(0);
+                            Log.println(Log.ASSERT,"Response from server",j.getJSONArray("FoodItems").getString(0));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.println(Log.ASSERT,"Failed json","failed");
+
+                        }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -123,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         });
         buttonEffect(cafeButton);
 
-        final Button newsButton = (Button) findViewById(R.id.CafeMenuButton);
+        final Button newsButton = (Button) findViewById(R.id.NewsFeed);
         newsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeToCafeMenu();
