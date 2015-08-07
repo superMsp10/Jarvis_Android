@@ -1,13 +1,14 @@
 package jarvis.mahan.jarvisandroid;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -33,6 +34,15 @@ public class CafeMenu extends AppCompatActivity {
         setTitle("Cafeteria Menu");
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        LinearLayout s = (LinearLayout) findViewById(R.id.CafeLinearlayout);
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        inflater.inflate(R.layout.cafemenucell, s);
+
+        TextView t = (TextView) s.getChildAt(0);
+        t.setText("hello");
+
+
 
 
     }
@@ -50,7 +60,6 @@ public class CafeMenu extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
 
         return super.onOptionsItemSelected(item);

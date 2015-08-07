@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                              res = new JSONArray(response);
 
-                            Log.println(Log.ASSERT, "Response from server", res.toString());
+                            // Log.println(Log.ASSERT, "Response from server", res.toString());
                             writeToFile(res.toString());
 
                         } catch (JSONException e) {
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     res = new JSONArray(readFromFile());
 
-                    Log.println(Log.ASSERT, "Data from file", res.toString());
+                    //Log.println(Log.ASSERT, "Data from file", res.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();

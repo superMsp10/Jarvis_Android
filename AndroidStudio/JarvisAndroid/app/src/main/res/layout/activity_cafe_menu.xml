@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingPrefix"
 
@@ -9,14 +9,19 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="jarvis.mahan.jarvisandroid.CafeMenu"
     android:theme="@style/CustomActionBarTheme"
-    >
+    android:background="@color/secondary"
+    android:fillViewport="false"
+    android:id="@+id/CafeScrollView">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:fillViewport="true" />
-</RelativeLayout>
+        android:orientation="vertical"
+        android:id="@+id/CafeLinearlayout"
+        android:baselineAligned="false">
+
+
+    </LinearLayout>
+</ScrollView>
+
+
