@@ -28,12 +28,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class CafeMenu extends AppCompatActivity {
+    public JSONArray menus;
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -59,6 +62,38 @@ public class CafeMenu extends AppCompatActivity {
     }
 
 
+    JSONArray sortJsonArray(JSONArray start) throws JSONException {
+        Integer[] arr;
+        arr = new Integer[start.length()];
+        for (int i = 0; i < start.length(); i++) {
+            arr[i] = (start.getJSONObject(i).getInt("Epoch"));
+        }
+
+        Arrays.sort(arr, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer x, Integer y) {
+                return y - x;
+            }
+        });
+
+
+        JSONArray rs = new JSONArray();
+
+        for (int i = 0; i < start.length(); i++) {
+            //For each of the json objects in the res array
+
+            int index = Arrays.asList(arr).indexOf(start.getJSONObject(i).getInt("Epoch"));
+            //see where its epoch is in the integer array
+
+            rs.put(index, start.getJSONObject(i));
+            //assign the whole json object to that index
+        }
+
+        return rs;
+
+    }
+
+
     void getData() {
 
 
@@ -78,7 +113,10 @@ public class CafeMenu extends AppCompatActivity {
 
 
                         try {
-                            res = new JSONArray(response);
+                            res = sortJsonArray(new JSONArray(response));
+
+
+
                             useData(res);
                             // Log.println(Log.ASSERT, "Response from server", res.toString());
                             writeToFile(res.toString());
@@ -159,6 +197,7 @@ public class CafeMenu extends AppCompatActivity {
     }
 
     void useData(JSONArray data) throws JSONException {
+        menus = new JSONArray(data.toString());
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
         int cellHeight = displayHeight / 6;
         LinearLayout s = (LinearLayout) findViewById(R.id.CafeLinearlayout);
@@ -176,7 +215,7 @@ public class CafeMenu extends AppCompatActivity {
 
         }
         JSONObject j = data.getJSONObject(0);
-        Log.println(Log.ASSERT, "Data", j.toString());
+        //  Log.println(Log.ASSERT, "Data", j.toString());
 
 
 
