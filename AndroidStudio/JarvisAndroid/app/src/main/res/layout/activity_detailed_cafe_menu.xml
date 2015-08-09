@@ -1,0 +1,20 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="jarvis.mahan.jarvisandroid.DetailedCafeMenu"
+    android:theme="@style/CustomActionBarTheme"
+    android:background="@color/secondary"
+    android:fillViewport="true"
+    android:id="@+id/DetailedCafeScrollView">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:id="@+id/DetailedCafeLinearlayout">
+
+    </LinearLayout>
+</ScrollView>

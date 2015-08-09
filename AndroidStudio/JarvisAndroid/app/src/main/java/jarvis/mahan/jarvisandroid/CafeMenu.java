@@ -1,13 +1,16 @@
 package jarvis.mahan.jarvisandroid;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,7 +23,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -37,10 +39,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class CafeMenu extends AppCompatActivity {
     public JSONArray menus;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +118,6 @@ public class CafeMenu extends AppCompatActivity {
 
                         try {
                             res = sortJsonArray(new JSONArray(response));
-
 
 
                             useData(res);
@@ -208,35 +211,47 @@ public class CafeMenu extends AppCompatActivity {
             inflater.inflate(R.layout.cafemenucell, s);
 
             TextView t = (TextView) s.getChildAt(i);
+            t.setId(i);
             t.getLayoutParams().height = cellHeight;
+            t.getBackground().clearColorFilter();
             t.requestLayout();
+
+            t.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                        v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        changeActivity(0);
+
+                    } else {
+
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+
+                    }
+
+
+                    return true;
+                }
+            });
 
             t.setText(name);
 
         }
-        JSONObject j = data.getJSONObject(0);
-        //  Log.println(Log.ASSERT, "Data", j.toString());
-
 
 
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        return true;
-    }
+    void changeActivity(int index) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Intent intent;
+        intent = new Intent(this, DetailedCafeMenu.class);
+        startActivity(intent);
 
-
-        return super.onOptionsItemSelected(item);
     }
 
 

@@ -6,4 +6,6 @@
     <string name="title_activity_hub">Hub</string>
     <string name="title_activity_calender">Calender</string>
     <string name="title_activity_cafe_menu">CafeMenu</string>
+    <string name="title_activity_detailed_cafe_menu">DetailedCafeMenu</string>
+    <string name="title_activity_detailed">detailed</string>
 </resources>
