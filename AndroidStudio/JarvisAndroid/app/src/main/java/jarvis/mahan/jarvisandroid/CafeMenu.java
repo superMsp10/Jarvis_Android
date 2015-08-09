@@ -224,7 +224,11 @@ public class CafeMenu extends AppCompatActivity {
 
                         v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
                         v.invalidate();
-                        changeActivity(0);
+                        try {
+                            changeActivity(v.getId());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     } else {
 
@@ -246,10 +250,12 @@ public class CafeMenu extends AppCompatActivity {
     }
 
 
-    void changeActivity(int index) {
+    void changeActivity(int index) throws JSONException {
 
         Intent intent;
         intent = new Intent(this, DetailedCafeMenu.class);
+        String message = menus.getJSONObject(index).getJSONArray("FoodItems").toString();
+        intent.putExtra("Menu", message);
         startActivity(intent);
 
     }
