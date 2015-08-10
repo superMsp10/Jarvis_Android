@@ -256,6 +256,7 @@ public class CafeMenu extends AppCompatActivity {
         intent = new Intent(this, DetailedCafeMenu.class);
         String message = menus.getJSONObject(index).getJSONArray("FoodItems").toString();
         intent.putExtra("Menu", message);
+
         startActivity(intent);
 
     }

@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     tools:context="jarvis.mahan.jarvisandroid.DetailedCafeMenu"
     android:theme="@style/CustomActionBarTheme"
-    android:background="@color/secondary"
+    android:background="@android:color/white"
     android:fillViewport="true"
     android:id="@+id/DetailedCafeScrollView">
 
