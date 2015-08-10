@@ -52,12 +52,13 @@ public class DetailedCafeMenu extends ActionBarActivity {
 
     void useData(JSONArray data) throws JSONException {
 
+
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
         int cellHeight = displayHeight / 4;
         LinearLayout s = (LinearLayout) findViewById(R.id.DetailedCafeLinearlayout);
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        // Log.println(Log.ASSERT, "Linear layout",s.toString());
+        //Log.println(Log.ASSERT, "Linear layout", "hello");
         for (int i = 0; i < data.length(); i++) {
             String name = data.getString(i);
             inflater.inflate(R.layout.detailed_cafe_menu_cell, s);
