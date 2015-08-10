@@ -30,6 +30,13 @@ public class Hub extends AppCompatActivity {
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
+        int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+        int screenWidth = getWindowManager().getDefaultDisplay().getHeight();
+
+        int labelHeight = screenHeight/7;
+        int labelPos = (int)(labelHeight/1.5);
+        int textWidth = screenWidth -labelHeight;
+
         setTitle("Social HUB");
 
 

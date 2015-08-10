@@ -1,103 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="jarvis.mahan.jarvisandroid.Hub">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jarvis.mahan.jarvisandroid.Hub"
+    android:orientation="vertical"
+    >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="HUB"
-        android:id="@+id/hubTitle"
-        android:textSize="50sp"
-        android:singleLine="true" />
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/twitterIcon"
-        android:layout_below="@+id/hubTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp"
-        android:src="@drawable/ios_homescreen_icon" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="JCI Student Council Twitter"
-        android:id="@+id/jarvisTwitterIconTittle"
-        android:layout_below="@+id/twitterIcon"
-        android:textSize="12dp"
-        android:singleLine="true" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/fbIcon"
-        android:src="@drawable/faceicon"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/twitterIcon"
-        android:layout_marginLeft="00dp"
-        android:layout_alignLeft="@+id/jAppIcon" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="JCI Allumni Council Facebook"
-        android:id="@+id/fbIconTitle"
-        android:textSize="12dp"
-        android:layout_below="@+id/fbIcon"
-        android:layout_alignRight="@+id/hubTitle"
-        android:singleLine="true" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/webIcon"
-        android:src="@drawable/webicon"
-        android:layout_marginTop="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/twitterIcon"
-        android:layout_below="@+id/twitterIcon" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Jarvis Colligiate Website"
-        android:id="@+id/textView2"
-        android:textSize="12dp"
-        android:layout_below="@+id/webIcon"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:singleLine="true" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/jAppIcon"
-        android:src="@drawable/jappicon"
-        android:layout_alignTop="@+id/webIcon"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Jarvis App Website"
-        android:id="@+id/jarvisAppIconTitle"
-        android:textSize="12dp"
-        android:layout_below="@+id/jAppIcon"
-        android:layout_alignParentRight="true"
-        android:singleLine="true" />
-
-</RelativeLayout>
+</LinearLayout>
