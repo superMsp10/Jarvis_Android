@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".detailed"
-            android:label="@string/title_activity_detailed"></activity>
+            android:label="@string/title_activity_detailed" />
         <activity
             android:name=".DetailedCafeMenu"
             android:label="@string/title_activity_detailed_cafe_menu"
