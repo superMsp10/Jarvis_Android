@@ -5,9 +5,8 @@
     android:id="@+id/hubMain"
     tools:context="jarvis.mahan.jarvisandroid.Hub"
     android:orientation="vertical"
-    android:weightSum="1">
-
-
+    android:weightSum="1"
+    android:background="@android:color/white">
 
 
 </LinearLayout>

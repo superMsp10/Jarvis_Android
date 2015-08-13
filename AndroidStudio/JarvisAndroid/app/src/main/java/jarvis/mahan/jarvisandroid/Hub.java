@@ -29,6 +29,7 @@ public class Hub extends AppCompatActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +48,8 @@ public class Hub extends AppCompatActivity {
         int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
         int screenWidth = getWindowManager().getDefaultDisplay().getHeight();
 
-        int labelHeight = screenHeight / 7;
-        int labelPos = (int) (labelHeight / 1.5);
+        int labelSize = screenHeight / 7;
+        int labelPos = (labelSize / 3);
 
 
         LinearLayout s = (LinearLayout) findViewById(R.id.hubMain);
@@ -62,11 +63,12 @@ public class Hub extends AppCompatActivity {
         //Instagram
         inflater.inflate(R.layout.hub_cell, s);
         b = (Button) findViewById(R.id.hubCellButton);
-        b.getLayoutParams().height = labelHeight;
-        b.getLayoutParams().width = labelHeight;
+        b.getLayoutParams().height = labelSize;
+        b.getLayoutParams().width = labelSize;
 
         int sdk = android.os.Build.VERSION.SDK_INT;
         if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+
             b.setBackgroundDrawable(getResources().getDrawable(R.drawable.instagram));
         } else {
             b.setBackground(getResources().getDrawable(R.drawable.instagram));
@@ -93,8 +95,9 @@ public class Hub extends AppCompatActivity {
             }
         });
         v = (TextView) findViewById(R.id.hubCellTextView);
-        v.getLayoutParams().height = labelHeight;
+        v.getLayoutParams().height = labelSize;
         v.setText("Instagram profile of the Jarvis CI App");
+        v.setId(0);
         v.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -117,8 +120,194 @@ public class Hub extends AppCompatActivity {
         v.invalidate();
 
 
-
         s.addView(space, 1);
+
+
+        //Twitter
+        inflater.inflate(R.layout.hub_cell, s);
+        b = (Button) findViewById(R.id.hubCellButton);
+        b.getLayoutParams().height = labelSize;
+        b.getLayoutParams().width = labelSize;
+        b.setId(0);
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            b.setBackgroundDrawable(getResources().getDrawable(R.drawable.twitterlogo));
+        } else {
+            b.setBackground(getResources().getDrawable(R.drawable.twitterlogo));
+        }
+
+        b.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    v.getBackground().clearColorFilter();
+                    goToLink("https://twitter.com/jarvisstudents");
+
+                    v.invalidate();
+
+
+                } else {
+                    v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                    v.invalidate();
+
+                }
+
+                return true;
+            }
+        });
+        v = (TextView) findViewById(R.id.hubCellTextView);
+        v.getLayoutParams().height = labelSize;
+        v.setText("Twitter profile of the Jarvis CI student council");
+        v.setId(0);
+        v.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    v.getBackground().clearColorFilter();
+                    goToLink("https://twitter.com/jarvisstudents");
+
+                    v.invalidate();
+
+
+                } else {
+                    v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                    v.invalidate();
+
+                }
+
+                return true;
+            }
+        });
+        v.invalidate();
+
+        space = new View(this);
+        space.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, labelPos));
+        s.addView(space, 3);
+
+        //Jarvis Website
+        inflater.inflate(R.layout.hub_cell, s);
+        b = (Button) findViewById(R.id.hubCellButton);
+        b.getLayoutParams().height = labelSize;
+        b.getLayoutParams().width = labelSize;
+        b.setId(0);
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            b.setBackgroundDrawable(getResources().getDrawable(R.drawable.minerva_shield_colour));
+        } else {
+            b.setBackground(getResources().getDrawable(R.drawable.minerva_shield_colour));
+        }
+
+        b.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    v.getBackground().clearColorFilter();
+                    goToLink("http://jarviscollegiate.com");
+
+                    v.invalidate();
+
+
+                } else {
+                    v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                    v.invalidate();
+
+                }
+
+                return true;
+            }
+        });
+        v = (TextView) findViewById(R.id.hubCellTextView);
+        v.getLayoutParams().height = labelSize;
+        v.setText("Jarvis CI Website");
+        v.setId(0);
+        v.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    v.getBackground().clearColorFilter();
+                    goToLink("http://jarviscollegiate.com");
+
+                    v.invalidate();
+
+
+                } else {
+                    v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                    v.invalidate();
+
+                }
+
+                return true;
+            }
+        });
+        v.invalidate();
+
+        space = new View(this);
+        space.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, labelPos));
+        s.addView(space, 5);
+
+        //Facebook
+        inflater.inflate(R.layout.hub_cell, s);
+        b = (Button) findViewById(R.id.hubCellButton);
+        b.getLayoutParams().height = labelSize;
+        b.getLayoutParams().width = labelSize;
+        b.setId(0);
+
+
+        b.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    v.getBackground().clearColorFilter();
+                    goToLink("https://m.facebook.com/pages/Jarvis-Collegiate-Institute/111887858827833");
+
+                    v.invalidate();
+
+
+                } else {
+                    v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                    v.invalidate();
+
+                }
+
+                return true;
+            }
+        });
+        v = (TextView) findViewById(R.id.hubCellTextView);
+        v.getLayoutParams().height = labelSize;
+        v.setText("Facebook page of Jarvis CI");
+        v.setId(0);
+        v.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    v.getBackground().clearColorFilter();
+                    goToLink("https://m.facebook.com/pages/Jarvis-Collegiate-Institute/111887858827833");
+
+                    v.invalidate();
+
+
+                } else {
+                    v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                    v.invalidate();
+
+                }
+
+                return true;
+            }
+        });
+        v.invalidate();
+
+        space = new View(this);
+        space.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, labelPos));
+        s.addView(space, 7);
+        //Emails
+        inflater.inflate(R.layout.hub_cell, s);
+        b = (Button) findViewById(R.id.hubCellButton);
+        b.setVisibility(View.GONE);
+        v = (TextView) findViewById(R.id.hubCellTextView);
+        v.getLayoutParams().height = labelSize;
+        v.setBackgroundColor(getResources().getColor(R.color.primary));
+        v.setText("Be sure to send us your feedback at jarvisCIApp@gmail.com");
+
+
 
 
     }
