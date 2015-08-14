@@ -49,7 +49,7 @@ public class Hub extends AppCompatActivity {
         int screenWidth = getWindowManager().getDefaultDisplay().getHeight();
 
         int labelSize = screenHeight / 7;
-        int labelPos = (labelSize / 3);
+        int labelPos = (labelSize / 4);
 
 
         LinearLayout s = (LinearLayout) findViewById(R.id.hubMain);
