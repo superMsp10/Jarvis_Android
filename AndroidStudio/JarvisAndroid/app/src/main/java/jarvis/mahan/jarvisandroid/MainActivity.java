@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < start.length(); i++) {
             //For each of the json objects in the res array
 
-            int index = Arrays.asList(arr).indexOf(start.getJSONObject(i).getInt("Epoch"));
+            int index = Arrays.asList(arr).indexOf(start.getJSONObject(i).getInt("MonthOrder"));
             //see where its epoch is in the integer array
 
             rs.put(index, start.getJSONObject(i));
@@ -254,7 +255,8 @@ public class MainActivity extends AppCompatActivity {
 
     void useData(JSONArray data) {
         try {
-            DayCalculator calc = new DayCalculator(data,"03 26 2012");
+
+            DayCalculator calc = new DayCalculator(data, new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("13 September 2015 15 47 59"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
