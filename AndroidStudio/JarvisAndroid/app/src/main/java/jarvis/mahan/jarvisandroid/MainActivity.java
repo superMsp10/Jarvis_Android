@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
     void useData(JSONArray data) {
         try {
 
-            DayCalculator calc = new DayCalculator(data, new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("13 September 2015 15 47 59"));
+            DayCalculator calc = new DayCalculator(data, new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("1 february 2016 00 00 00"));
         } catch (ParseException e) {
             e.printStackTrace();
         }

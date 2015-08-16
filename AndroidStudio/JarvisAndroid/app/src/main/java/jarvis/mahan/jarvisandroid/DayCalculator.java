@@ -1,5 +1,7 @@
 package jarvis.mahan.jarvisandroid;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 
 import java.text.ParseException;
@@ -20,11 +22,10 @@ public class DayCalculator {
     JSONArray serverData;
 
 
-
     public DayCalculator(JSONArray data, Date date) throws ParseException {
         serverData = data;
         today = date;
-        //   Log.println(Log.ASSERT, "Today", today.toString());
+        Log.println(Log.ASSERT, "Today", today.toString());
 
         init();
 
@@ -36,8 +37,10 @@ public class DayCalculator {
         offset = 1;
         SimpleDateFormat dateFormat = new SimpleDateFormat("d LLLL yyyy");
         sept = dateFormat.parse("1 September 2015");
+        int days = daysSinceStart(today);
 
-        //Log.println(Log.ASSERT, "Difference",Integer.toString(daysSinceStart(today)));
+      // Log.println(Log.ASSERT, "Days", Integer.toString(days));
+       Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
     }
 
     public int daysSinceStart(Date toDate) {
@@ -49,11 +52,20 @@ public class DayCalculator {
         long hoursInMilli = minutesInMilli * 60;
         long daysInMilli = hoursInMilli * 24;
         long elapsedDays = different / daysInMilli;
-        different = different % daysInMilli;
-        different = different % daysInMilli;
 
         return (int) elapsedDays;
     }
+
+    double numberOfSatAndSun(int numberOfDays) {
+      //  Log.println(Log.ASSERT, "Number of Weeks", Double.toString(numberOfDays / 7));
+
+       // Log.println(Log.ASSERT, "Number of Weeks rounded", Double.toString(Math.floor(numberOfDays / 7)));
+
+        double sS = Math.floor(numberOfDays / 7) * 2;
+        return sS;
+    }
+
+
 /*
     public void printDifference(Date startDate,){
 
