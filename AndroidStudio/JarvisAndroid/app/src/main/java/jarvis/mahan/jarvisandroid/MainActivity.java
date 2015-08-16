@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         Arrays.sort(arr, new Comparator<Integer>() {
             @Override
             public int compare(Integer x, Integer y) {
-                return y - x;
+                return x - y;
             }
         });
 
@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
     void useData(JSONArray data) {
         try {
 
-            DayCalculator calc = new DayCalculator(data, new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("1 february 2016 00 00 00"));
+            DayCalculator calc = new DayCalculator(data, new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("1 september 2015 00 00 00"));
         } catch (ParseException e) {
             e.printStackTrace();
         }

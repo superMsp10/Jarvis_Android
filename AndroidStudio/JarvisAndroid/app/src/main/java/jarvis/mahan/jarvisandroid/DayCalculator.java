@@ -3,6 +3,8 @@ package jarvis.mahan.jarvisandroid;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +21,10 @@ public class DayCalculator {
     int dayOffset;
     int offset;
     int staticSeptemberDayOffset;
+    String dayDescription;
+    String monthName = null;
     JSONArray serverData;
+    JSONArray noSchoolDays;
 
 
     public DayCalculator(JSONArray data, Date date) throws ParseException {
@@ -34,13 +39,37 @@ public class DayCalculator {
 
     void init() throws ParseException {
         staticSeptemberDayOffset = 1;
+        dayOffset = staticSeptemberDayOffset;
         offset = 1;
         SimpleDateFormat dateFormat = new SimpleDateFormat("d LLLL yyyy");
         sept = dateFormat.parse("1 September 2015");
-        int days = daysSinceStart(today);
+        dateFormat = new SimpleDateFormat("LLLL");
+        for (int i = 0; i < serverData.length(); i++) {
+            JSONObject j = null;
 
-      // Log.println(Log.ASSERT, "Days", Integer.toString(days));
-       Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
+            try {
+                j = serverData.getJSONObject(i);
+                monthName = j.getString("Month");
+                noSchoolDays = j.getJSONArray("NoSchoolDates");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            if (monthName != null && monthName.equals(dateFormat.format(today)))
+                break;
+
+            dayOffset += noSchoolDays.length();
+
+        }
+
+
+        //  int days = daysSinceStart(today);
+        // Log.println(Log.ASSERT, "Days", Integer.toString(days));
+        //Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
+        Log.println(Log.ASSERT, "No school days offset", String.valueOf(dayOffset));
+
     }
 
     public int daysSinceStart(Date toDate) {
@@ -57,12 +86,27 @@ public class DayCalculator {
     }
 
     double numberOfSatAndSun(int numberOfDays) {
-      //  Log.println(Log.ASSERT, "Number of Weeks", Double.toString(numberOfDays / 7));
+        //  Log.println(Log.ASSERT, "Number of Weeks", Double.toString(numberOfDays / 7));
 
-       // Log.println(Log.ASSERT, "Number of Weeks rounded", Double.toString(Math.floor(numberOfDays / 7)));
+        // Log.println(Log.ASSERT, "Number of Weeks rounded", Double.toString(Math.floor(numberOfDays / 7)));
 
         double sS = Math.floor(numberOfDays / 7) * 2;
         return sS;
+    }
+
+    String getDayDiscription() {
+
+        return dayDescription;
+    }
+
+
+    int numberOfNoSchoolDatesBeforeToday() {
+
+        int NSDays = 0;
+
+
+        return NSDays;
+
     }
 
 
