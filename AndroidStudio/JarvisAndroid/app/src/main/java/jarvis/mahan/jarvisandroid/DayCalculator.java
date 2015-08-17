@@ -25,6 +25,7 @@ public class DayCalculator {
     String monthName = null;
     JSONArray serverData;
     JSONArray noSchoolDays;
+    SimpleDateFormat dateFormat;
 
 
     public DayCalculator(JSONArray data, Date date) throws ParseException {
@@ -41,7 +42,7 @@ public class DayCalculator {
         staticSeptemberDayOffset = 1;
         dayOffset = staticSeptemberDayOffset;
         offset = 1;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("d LLLL yyyy");
+        dateFormat = new SimpleDateFormat("d LLLL yyyy");
         sept = dateFormat.parse("1 September 2015");
         dateFormat = new SimpleDateFormat("LLLL");
         for (int i = 0; i < serverData.length(); i++) {
@@ -68,9 +69,15 @@ public class DayCalculator {
         //  int days = daysSinceStart(today);
         // Log.println(Log.ASSERT, "Days", Integer.toString(days));
         //Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
-        Log.println(Log.ASSERT, "No school days offset", String.valueOf(dayOffset));
+        try {
+            Log.println(Log.ASSERT, "# of No school days", String.valueOf(numberOfNoSchoolDatesBeforeToday()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
     }
+
 
     public int daysSinceStart(Date toDate) {
 
@@ -100,10 +107,30 @@ public class DayCalculator {
     }
 
 
-    int numberOfNoSchoolDatesBeforeToday() {
+    int numberOfNoSchoolDatesBeforeToday() throws JSONException {
 
         int NSDays = 0;
+        dateFormat = new SimpleDateFormat("d");
+        int todayInt = Integer.parseInt(dateFormat.format(today));
 
+
+        for (int i = 0; i < noSchoolDays.length(); i++) {
+
+            JSONObject j = noSchoolDays.getJSONObject(i);
+            int date = j.getInt("Date");
+
+            if (date == todayInt) {
+                String reason = j.getString("Reason");
+                dayDescription = ("No School " + reason);
+
+                return -1;
+
+            } else if (date < todayInt) {
+
+                NSDays++;
+            }
+
+        }
 
         return NSDays;
 
