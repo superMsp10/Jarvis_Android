@@ -10,22 +10,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Mahan on 14/08/2015.
- */
 
-
-public class DayCalculator {
-    Date today;
-    Date sept;
-    int dayOffset;
-    int offset;
-    int staticSeptemberDayOffset;
-    String dayDescription;
-    String monthName = null;
-    JSONArray serverData;
-    JSONArray noSchoolDays;
-    SimpleDateFormat dateFormat;
+class DayCalculator {
+    private Date today;
+    private Date sept;
+    private int dayOffset;
+    private int offset;
+    private int staticSeptemberDayOffset;
+    private String dayDescription;
+    private String monthName = null;
+    private JSONArray serverData;
+    private JSONArray noSchoolDays;
+    private SimpleDateFormat dateFormat;
 
 
     public DayCalculator(JSONArray data, Date date) throws ParseException {
@@ -45,9 +41,8 @@ public class DayCalculator {
         dateFormat = new SimpleDateFormat("d LLLL yyyy");
         sept = dateFormat.parse("1 September 2015");
         dateFormat = new SimpleDateFormat("LLLL");
+        JSONObject j;
         for (int i = 0; i < serverData.length(); i++) {
-            JSONObject j = null;
-
             try {
                 j = serverData.getJSONObject(i);
                 monthName = j.getString("Month");
@@ -94,11 +89,8 @@ public class DayCalculator {
 
     double numberOfSatAndSun(int numberOfDays) {
         //  Log.println(Log.ASSERT, "Number of Weeks", Double.toString(numberOfDays / 7));
-
         // Log.println(Log.ASSERT, "Number of Weeks rounded", Double.toString(Math.floor(numberOfDays / 7)));
-
-        double sS = Math.floor(numberOfDays / 7) * 2;
-        return sS;
+        return Math.floor(numberOfDays / 7) * 2;
     }
 
     String getDayDiscription() {

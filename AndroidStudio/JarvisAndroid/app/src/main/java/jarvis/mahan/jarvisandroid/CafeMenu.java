@@ -38,7 +38,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class CafeMenu extends AppCompatActivity {
-    public JSONArray menus;
+    private JSONArray menus;
 
     @Override
     protected void attachBaseContext(Context newBase) {

@@ -64,17 +64,43 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Jarvis");
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
-        Button cafe = (Button) findViewById(R.id.CafeMenuButton);
-        cafe.getLayoutParams().height = displayHeight / 6;
 
-        Button hub = (Button) findViewById(R.id.tohubButton);
-        hub.getLayoutParams().height = displayHeight / 6;
 
-        Button news = (Button) findViewById(R.id.NewsFeed);
-        news.getLayoutParams().height = displayHeight / 6;
+        Button button = (Button) findViewById(R.id.CafeMenuButton);
+        button.getLayoutParams().height = displayHeight / 6;
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeToCafeMenu();
+            }
+        });
+        buttonEffect(button);
 
-        Button calendar = (Button) findViewById(R.id.calenderButton);
-        calendar.getLayoutParams().height = displayHeight / 6;
+        button = (Button) findViewById(R.id.tohubButton);
+        button.getLayoutParams().height = displayHeight / 6;
+        buttonEffect(button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeToHub();
+            }
+        });
+
+        button = (Button) findViewById(R.id.NewsFeed);
+        button.getLayoutParams().height = displayHeight / 6;
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeToCafeMenu();
+            }
+        });
+        buttonEffect(button);
+
+        button = (Button) findViewById(R.id.calenderButton);
+        button.getLayoutParams().height = displayHeight / 6;
+        buttonEffect(button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeToCalender();
+            }
+        });
 
         TextView text = (TextView) findViewById(R.id.welcomLabel);
         text.getLayoutParams().height = (displayHeight / 6) / 3;
@@ -82,39 +108,6 @@ public class MainActivity extends AppCompatActivity {
         text.getLayoutParams().height = (displayHeight / 6) / 3;
         text = (TextView) findViewById(R.id.dayAndPeriodLabel);
         text.getLayoutParams().height = (displayHeight / 6) / 3;
-
-
-        final Button hubButton = (Button) findViewById(R.id.tohubButton);
-        buttonEffect(hubButton);
-        hubButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                changeToHub();
-            }
-        });
-
-        final Button calenderButton = (Button) findViewById(R.id.calenderButton);
-        buttonEffect(calenderButton);
-        calenderButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                changeToCalender();
-            }
-        });
-
-        final Button cafeButton = (Button) findViewById(R.id.CafeMenuButton);
-        cafeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                changeToCafeMenu();
-            }
-        });
-        buttonEffect(cafeButton);
-
-        final Button newsButton = (Button) findViewById(R.id.NewsFeed);
-        newsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                changeToCafeMenu();
-            }
-        });
-        buttonEffect(newsButton);
 
         getCalcData();
 
@@ -273,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static void buttonEffect(View button) {
+    private static void buttonEffect(View button) {
         button.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
