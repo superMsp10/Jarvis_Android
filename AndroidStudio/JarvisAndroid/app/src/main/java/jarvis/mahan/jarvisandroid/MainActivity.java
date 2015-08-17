@@ -33,6 +33,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -248,8 +249,15 @@ public class MainActivity extends AppCompatActivity {
 
     void useData(JSONArray data) {
         try {
+            Date d = new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("29 March 2016 00 00 00");
+            Log.println(Log.ASSERT, "Today", d.toString());
+            DayCalculator calc = new DayCalculator(data, d);
+            try {
+                Log.println(Log.ASSERT, "Day", String.valueOf(calc.checkDay()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            DayCalculator calc = new DayCalculator(data, new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("10 september 2015 00 00 00"));
         } catch (ParseException e) {
             e.printStackTrace();
         }

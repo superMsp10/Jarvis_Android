@@ -1,7 +1,5 @@
 package jarvis.mahan.jarvisandroid;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +25,6 @@ class DayCalculator {
     public DayCalculator(JSONArray data, Date date) throws ParseException {
         serverData = data;
         today = date;
-        Log.println(Log.ASSERT, "Today", today.toString());
 
         init();
 
@@ -64,17 +61,12 @@ class DayCalculator {
         //  int days = daysSinceStart(today);
         // Log.println(Log.ASSERT, "Days", Integer.toString(days));
         //Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
-        try {
-            Log.println(Log.ASSERT, "# of No school days", String.valueOf(numberOfNoSchoolDatesBeforeToday()));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
 
     }
 
 
-    public int daysSinceStart(Date toDate) {
+    int daysSinceStart(Date toDate) {
 
         long different = toDate.getTime() - sept.getTime();
 
@@ -87,15 +79,47 @@ class DayCalculator {
         return (int) elapsedDays;
     }
 
-    double numberOfSatAndSun(int numberOfDays) {
+    int numberOfSatAndSun(int numberOfDays) {
         //  Log.println(Log.ASSERT, "Number of Weeks", Double.toString(numberOfDays / 7));
         // Log.println(Log.ASSERT, "Number of Weeks rounded", Double.toString(Math.floor(numberOfDays / 7)));
-        return Math.floor(numberOfDays / 7) * 2;
+        return (int) Math.floor(numberOfDays / 7) * 2;
     }
 
     String getDayDiscription() {
 
         return dayDescription;
+    }
+
+
+    public int checkDay() throws JSONException {
+
+        int numberOfDays = daysSinceStart(today);
+        int NSchDays = numberOfNoSchoolDatesBeforeToday();
+
+        if (NSchDays != -1) {
+
+            int sS = numberOfSatAndSun(numberOfDays + offset);
+            int numberOfSchDays = numberOfDays - (NSchDays + sS + dayOffset);
+
+
+            int day = (numberOfSchDays + offset) % 4;
+            dateFormat = new SimpleDateFormat("EEEE");
+            if (day == 0) {
+                day = 4;
+            }
+            String td = dateFormat.format(today);
+
+            if (td.equals("Sunday") || td.equals("Saturday")) {
+                return -1;
+            }
+
+            return day;
+
+        }
+
+        return -1;
+
+
     }
 
 
