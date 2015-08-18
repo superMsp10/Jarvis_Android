@@ -75,12 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         getCalcData();
-        setupUI();
 
 
     }
 
-    void setupUI() {
+    void setupUI(String dayDescription) {
 
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
@@ -136,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
         text = (TextView) findViewById(R.id.dayAndPeriodLabel);
         text.getLayoutParams().height = (displayHeight / 6) / 3;
+        text.setText(dayDescription);
+
 
     }
 
@@ -273,14 +274,10 @@ public class MainActivity extends AppCompatActivity {
 
     void useData(JSONArray data) {
         try {
-
-            Log.println(Log.ASSERT, "Today", d.toString());
             DayCalculator calc = new DayCalculator(data, d);
-            try {
-                Log.println(Log.ASSERT, "Day", String.valueOf(calc.checkDay()));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
+            setupUI(calc.getDayDescription());
+
 
         } catch (ParseException e) {
             e.printStackTrace();
