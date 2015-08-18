@@ -40,6 +40,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MainActivity extends AppCompatActivity {
+    private Date d;
+    private SimpleDateFormat dateFormat;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -63,6 +65,23 @@ public class MainActivity extends AppCompatActivity {
         );
 
         setTitle("Jarvis");
+
+        try {
+            dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
+            d = dateFormat.parse("29 March 2016 00 00 00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        getCalcData();
+        setupUI();
+
+
+    }
+
+    void setupUI() {
+
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
 
@@ -107,11 +126,16 @@ public class MainActivity extends AppCompatActivity {
         text.getLayoutParams().height = (displayHeight / 6) / 3;
         text = (TextView) findViewById(R.id.dateLabel);
         text.getLayoutParams().height = (displayHeight / 6) / 3;
+        dateFormat = new SimpleDateFormat(" MMM dd, yyyy");
+        String date = dateFormat.format(d);
+        dateFormat = new SimpleDateFormat("EEEE");
+        String day = dateFormat.format(d);
+
+
+        text.setText(day + date);
+
         text = (TextView) findViewById(R.id.dayAndPeriodLabel);
         text.getLayoutParams().height = (displayHeight / 6) / 3;
-
-        getCalcData();
-
 
     }
 
@@ -249,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
 
     void useData(JSONArray data) {
         try {
-            Date d = new SimpleDateFormat("d LLLL yyyy hh mm ss").parse("29 March 2016 00 00 00");
+
             Log.println(Log.ASSERT, "Today", d.toString());
             DayCalculator calc = new DayCalculator(data, d);
             try {
