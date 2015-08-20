@@ -1,7 +1,5 @@
 package jarvis.mahan.jarvisandroid;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,7 +91,7 @@ class DayCalculator {
         dateFormat = new SimpleDateFormat("LLLL");
         String td = dateFormat.format(today);
 
-        Log.println(Log.ASSERT, "Today MONTH", td);
+        //Log.println(Log.ASSERT, "Today MONTH", td);
 
         if (td.equals("August") || td.equals("July")) {
             return "No School, Enjoy Summer Break!";
@@ -103,7 +101,7 @@ class DayCalculator {
         dateFormat = new SimpleDateFormat("EEEE");
         td = dateFormat.format(today);
 
-        Log.println(Log.ASSERT, "Today DAY", td);
+        // Log.println(Log.ASSERT, "Today DAY", td);
 
         if (td.equals("Sunday") || td.equals("Saturday")) {
             return "No School, Weekend";
@@ -116,7 +114,7 @@ class DayCalculator {
                 e.printStackTrace();
             }
 
-            Log.println(Log.ASSERT, "Today SCHDAY", String.valueOf(day));
+            // Log.println(Log.ASSERT, "Today SCHDAY", String.valueOf(day));
 
 
             if (day != -1) {

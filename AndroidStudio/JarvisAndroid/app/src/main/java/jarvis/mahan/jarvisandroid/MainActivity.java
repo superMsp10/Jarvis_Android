@@ -85,10 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        int buttonHeight = displayHeight / 6;
 
 
         Button button = (Button) findViewById(R.id.CafeMenuButton);
-        button.getLayoutParams().height = displayHeight / 6;
+        button.getLayoutParams().height = buttonHeight;
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeToCafeMenu();
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         buttonEffect(button);
 
         button = (Button) findViewById(R.id.tohubButton);
-        button.getLayoutParams().height = displayHeight / 6;
+        button.getLayoutParams().height = buttonHeight;
         buttonEffect(button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         button = (Button) findViewById(R.id.NewsFeed);
-        button.getLayoutParams().height = displayHeight / 6;
+        button.getLayoutParams().height = buttonHeight;
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeToCafeMenu();
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         buttonEffect(button);
 
         button = (Button) findViewById(R.id.calenderButton);
-        button.getLayoutParams().height = displayHeight / 6;
+        button.getLayoutParams().height = buttonHeight;
         buttonEffect(button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -124,9 +125,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         TextView text = (TextView) findViewById(R.id.welcomLabel);
-        text.getLayoutParams().height = (displayHeight / 6) / 3;
+        text.getLayoutParams().height = buttonHeight / 3;
         text = (TextView) findViewById(R.id.dateLabel);
-        text.getLayoutParams().height = (displayHeight / 6) / 3;
+        text.getLayoutParams().height = buttonHeight / 3;
         dateFormat = new SimpleDateFormat(" MMM dd, yyyy");
         String date = dateFormat.format(d);
         dateFormat = new SimpleDateFormat("EEEE");
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         text.setText(day + date);
 
         text = (TextView) findViewById(R.id.dayAndPeriodLabel);
-        text.getLayoutParams().height = (displayHeight / 6) / 3;
+        text.getLayoutParams().height = buttonHeight / 3;
         text.setText(dayDescription);
 
 
@@ -330,6 +331,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent;
         intent = new Intent(this, Calender.class);
+        dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
+        String message = dateFormat.format(d);
+        intent.putExtra("Date", message);
         startActivity(intent);
 
     }
