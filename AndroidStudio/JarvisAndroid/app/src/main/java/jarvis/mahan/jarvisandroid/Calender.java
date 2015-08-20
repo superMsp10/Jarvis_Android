@@ -2,10 +2,17 @@ package jarvis.mahan.jarvisandroid;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -67,8 +74,8 @@ public class Calender extends AppCompatActivity {
         String message = intent.getStringExtra("Date");
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
 
-        nOfDays = 10;
-        cellOffset = 5;
+        nOfDays = 30;
+        cellOffset = 15;
 
         try {
             d = dateFormat.parse(message);
@@ -219,7 +226,7 @@ public class Calender extends AppCompatActivity {
         try {
             DayCalculator calc = new DayCalculator(data, d);
             try {
-                Log.println(Log.ASSERT, "DayDis", GetDayDiscriptions(d, nOfDays, calc));
+                GetDayDiscriptions(d, nOfDays, calc);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -234,14 +241,50 @@ public class Calender extends AppCompatActivity {
 
 
     private String GetDayDiscriptions(Date startDate, int numOfDays, DayCalculator c) throws JSONException, ParseException {
-        int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
-        int screenWidth = getWindowManager().getDefaultDisplay().getHeight();
+
+        int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        int cellHeight = displayHeight / 6;
+        LinearLayout s = (LinearLayout) findViewById(R.id.CalendarLinearlayout);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        inflater.inflate(R.layout.cafemenucell, s);
+        TextView t = (TextView) s.getChildAt(0);
+        t.getLayoutParams().height = cellHeight;
+        t.requestLayout();
+        t.setBackgroundColor(Color.rgb(102, 204, 0));
+        t.setText("View more dates");
+        t.getBackground().clearColorFilter();
+        t.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                    v.invalidate();
+
+
+                } else {
+
+                    v.getBackground().clearColorFilter();
+                    v.invalidate();
+
+                }
+
+
+                return true;
+            }
+        });
+
+        t.setId(0);
+
+
         Date now = d;
         Calendar cal = Calendar.getInstance();
         cal.setTime(now);
         JSONArray b = new JSONArray();
+        dateFormat = new SimpleDateFormat("EEEE MMM dd, ");
 
-        for (int i = -cellOffset; i < numOfDays; i++) {
+        for (int i = 0; i < numOfDays; i++) {
             JSONObject a = new JSONObject();
             cal.add(Calendar.DATE, 1);  // number of days to add
             now = cal.getTime();  // dt is now the new date
@@ -251,12 +294,55 @@ public class Calender extends AppCompatActivity {
             c.init();
 
 
-            dateFormat = new SimpleDateFormat("EEEE MMM dd, ");
 
             String dateDay = dateFormat.format(now);
 
 
             String f = dateDay + c.getDayDescription();
+            inflater.inflate(R.layout.cafemenucell, s);
+
+            TextView txt = (TextView) s.getChildAt(numOfDays - (i + 1));
+            txt.setId(i + 1);
+            txt.getLayoutParams().height = cellHeight;
+            txt.getBackground().clearColorFilter();
+
+            if (f.contains("No School")) {
+                txt.setBackgroundColor(getResources().getColor(R.color.primary));
+            } else {
+                txt.setBackgroundColor(getResources().getColor(R.color.secondary));
+
+            }
+            Log.println(Log.ASSERT, "Today", dateFormat.format(d));
+
+            if (f.contains(dateFormat.format(d))) {
+                txt.getBackground().setColorFilter(Color.parseColor("#AAFFFFFF"), PorterDuff.Mode.SRC_ATOP);
+            }
+
+            txt.requestLayout();
+
+            txt.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                        v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+
+
+                    } else {
+
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+
+                    }
+
+
+                    return true;
+                }
+            });
+
+            txt.setText(f);
 
 
             a.put("day", c.checkDay());

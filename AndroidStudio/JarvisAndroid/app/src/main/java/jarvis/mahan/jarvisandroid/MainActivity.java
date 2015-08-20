@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = (Button) findViewById(R.id.CafeMenuButton);
         button.getLayoutParams().height = buttonHeight;
+        button.invalidate();
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeToCafeMenu();
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.tohubButton);
         button.getLayoutParams().height = buttonHeight;
+        button.invalidate();
         buttonEffect(button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -108,15 +110,17 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.NewsFeed);
         button.getLayoutParams().height = buttonHeight;
+        button.invalidate();
+        buttonEffect(button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeToCafeMenu();
             }
         });
-        buttonEffect(button);
 
         button = (Button) findViewById(R.id.calenderButton);
         button.getLayoutParams().height = buttonHeight;
+        button.invalidate();
         buttonEffect(button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
