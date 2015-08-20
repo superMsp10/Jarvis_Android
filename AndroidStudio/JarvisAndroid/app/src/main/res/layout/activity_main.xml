@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondary"
-    android:theme="@style/CustomActionBarTheme" >
+    android:theme="@style/CustomActionBarTheme">
 
 
-tools:context=".MainActivity">
+    tools:context=".MainActivity">
 
     <Button
 
@@ -18,7 +18,7 @@ tools:context=".MainActivity">
         android:id="@+id/tohubButton"
         android:singleLine="true"
         android:textSize="36sp"
-        android:textColor= "#FFFFFFFF"
+        android:textColor="#FFFFFFFF"
 
         fontPath="Capsuula.ttf"
         android:layout_below="@+id/CafeMenuButton"
@@ -39,7 +39,7 @@ tools:context=".MainActivity">
         android:id="@+id/calenderButton"
         android:singleLine="true"
         android:textSize="36sp"
-        android:textColor= "#FFFFFFFF"
+        android:textColor="#FFFFFFFF"
         fontPath="Capsuula.ttf"
         android:layout_below="@+id/tohubButton"
         android:layout_alignParentLeft="true"
@@ -62,7 +62,7 @@ tools:context=".MainActivity">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textSize="36sp"
-        android:textColor= "#FFFFFFFF"
+        android:textColor="#FFFFFFFF"
         android:background="@drawable/pizza"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -73,7 +73,7 @@ tools:context=".MainActivity">
     <Button
         android:singleLine="true"
         android:textSize="36sp"
-        android:textColor= "#FFFFFFFF"
+        android:textColor="#FFFFFFFF"
         fontPath="Capsuula.ttf"
         android:layout_width="fill_parent"
         android:layout_height="75dp"
@@ -93,7 +93,7 @@ tools:context=".MainActivity">
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Welcome right now it is:"
         android:id="@+id/welcomLabel"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:layout_below="@+id/NewsFeed"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffffff"
@@ -109,11 +109,12 @@ tools:context=".MainActivity">
         android:id="@+id/dateLabel"
         android:layout_below="@+id/welcomLabel"
         android:layout_centerHorizontal="true"
-        android:textSize="20dp"
+        android:textSize="22dp"
         fontPath="Capsuula.ttf"
 
         android:textColor="#ffffffff"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -125,10 +126,11 @@ tools:context=".MainActivity">
         android:id="@+id/dayAndPeriodLabel"
         android:layout_below="@+id/dateLabel"
         android:layout_centerHorizontal="true"
-        android:textSize="25sp"
+        android:textSize="28sp"
         android:textColor="#ffffffff"
         android:textAlignment="center"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

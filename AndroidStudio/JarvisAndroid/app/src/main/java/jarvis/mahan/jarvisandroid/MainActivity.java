@@ -66,12 +66,14 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("Jarvis");
 
+
+        dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
         try {
-            dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-            d = dateFormat.parse("29 March 2016 00 00 00");
+            d = dateFormat.parse("16 october 2015 00 00 00");
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        //d = new Date();
 
 
         getCalcData();
