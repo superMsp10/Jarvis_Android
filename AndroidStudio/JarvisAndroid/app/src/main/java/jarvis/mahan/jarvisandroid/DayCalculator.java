@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 class DayCalculator {
-    private Date today;
+    public Date today;
     private Date sept;
     private int dayOffset;
     private int offset;

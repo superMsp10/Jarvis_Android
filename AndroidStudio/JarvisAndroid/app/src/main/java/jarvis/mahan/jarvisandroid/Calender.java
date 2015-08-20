@@ -16,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -26,6 +27,7 @@ import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -38,6 +40,7 @@ public class Calender extends AppCompatActivity {
     private SimpleDateFormat dateFormat;
     private String[] stringsOfDays;
     int cellOffset;
+    int nOfDays;
 
 
     @Override
@@ -63,6 +66,9 @@ public class Calender extends AppCompatActivity {
         Intent intent = getIntent();
         String message = intent.getStringExtra("Date");
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
+
+        nOfDays = 10;
+        cellOffset = 5;
 
         try {
             d = dateFormat.parse(message);
@@ -212,8 +218,11 @@ public class Calender extends AppCompatActivity {
 
         try {
             DayCalculator calc = new DayCalculator(data, d);
-
-            setupUI();
+            try {
+                Log.println(Log.ASSERT, "DayDis", GetDayDiscriptions(d, nOfDays, calc));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
         } catch (ParseException e) {
@@ -223,9 +232,42 @@ public class Calender extends AppCompatActivity {
 
     }
 
-    private void setupUI() {
+
+    private String GetDayDiscriptions(Date startDate, int numOfDays, DayCalculator c) throws JSONException, ParseException {
         int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
         int screenWidth = getWindowManager().getDefaultDisplay().getHeight();
+        Date now = d;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(now);
+        JSONArray b = new JSONArray();
+
+        for (int i = -cellOffset; i < numOfDays; i++) {
+            JSONObject a = new JSONObject();
+            cal.add(Calendar.DATE, 1);  // number of days to add
+            now = cal.getTime();  // dt is now the new date
+
+            c.today = now;
+
+            c.init();
+
+
+            dateFormat = new SimpleDateFormat("EEEE MMM dd, ");
+
+            String dateDay = dateFormat.format(now);
+
+
+            String f = dateDay + c.getDayDescription();
+
+
+            a.put("day", c.checkDay());
+            a.put("dayDis", f);
+
+
+            b.put(a);
+
+        }
+        return b.toString();
+
     }
 
 
