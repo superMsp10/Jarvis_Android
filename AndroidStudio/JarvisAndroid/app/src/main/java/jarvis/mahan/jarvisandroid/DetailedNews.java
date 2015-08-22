@@ -1,39 +1,67 @@
 package jarvis.mahan.jarvisandroid;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class DetailedNews extends ActionBarActivity {
+public class DetailedNews extends AppCompatActivity {
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_news);
-    }
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.primary));
+        }
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("Capsuula.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+        setTitle("News");
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_detailed_news, menu);
-        return true;
-    }
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("News");
+        String title = null;
+        String des = null;
+        try {
+            JSONObject news = new JSONObject(message);
+            title = news.getString("Title");
+            des = news.getString("Discription");
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        return super.onOptionsItemSelected(item);
+        int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        TextView t = (TextView) findViewById(R.id.newsTitle);
+        t.getLayoutParams().height = displayHeight / 6;
+        t.setText(title);
+        t.getBackground().setColorFilter(Color.parseColor("#80000000"), PorterDuff.Mode.SRC_ATOP);
+
+        t = (TextView) findViewById(R.id.news);
+        t.setText(des);
+
+
+
     }
+
 }
