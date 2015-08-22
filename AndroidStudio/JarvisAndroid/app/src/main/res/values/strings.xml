@@ -9,4 +9,5 @@
     <string name="title_activity_detailed_cafe_menu">DetailedCafeMenu</string>
     <string name="title_activity_detailed">detailed</string>
     <string name="title_activity_hub_link">HubLinkActivity</string>
+    <string name="title_activity_news_feed">NewsFeed</string>
 </resources>

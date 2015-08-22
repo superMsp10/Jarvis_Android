@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         buttonEffect(button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                changeToCafeMenu();
+                changeToNewsFeed();
             }
         });
 
@@ -327,6 +327,14 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent;
         intent = new Intent(this, CafeMenu.class);
+        startActivity(intent);
+
+    }
+
+    private void changeToNewsFeed() {
+
+        Intent intent;
+        intent = new Intent(this, NewsFeed.class);
         startActivity(intent);
 
     }
