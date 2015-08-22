@@ -174,6 +174,9 @@ class DayCalculator {
 
             if (date == todayInt) {
                 String reason = j.getString("Reason");
+                if (reason.contains("Special Schedule")) {
+                    dayDescription = "Special Schedule, check News Feed for details";
+                } else
                 dayDescription = ("No School " + reason);
 
                 return -1;

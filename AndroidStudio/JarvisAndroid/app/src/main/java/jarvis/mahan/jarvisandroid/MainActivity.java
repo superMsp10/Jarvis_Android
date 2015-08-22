@@ -68,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-        try {
+        /* try {
             d = dateFormat.parse("16 october 2015 00 00 00");
         } catch (ParseException e) {
             e.printStackTrace();
-        }
-        //d = new Date();
+        }*/
+        d = new Date();
 
 
         getCalcData();

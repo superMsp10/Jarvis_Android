@@ -6,12 +6,14 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -240,7 +242,7 @@ public class Calender extends AppCompatActivity {
     }
 
 
-    private String GetDayDiscriptions(Date startDate, int numOfDays, DayCalculator c) throws JSONException, ParseException {
+    private String GetDayDiscriptions(final Date startDate, final int numOfDays, final DayCalculator c) throws JSONException, ParseException {
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
         int cellHeight = displayHeight / 6;
@@ -253,11 +255,14 @@ public class Calender extends AppCompatActivity {
         t.setBackgroundColor(Color.rgb(102, 204, 0));
         t.setText("View more dates");
         t.getBackground().clearColorFilter();
+        final ScrollView scroll = (ScrollView) findViewById(R.id.CalendarScrollView);
+
         t.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
                     v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
                     v.invalidate();
@@ -267,6 +272,13 @@ public class Calender extends AppCompatActivity {
 
                     v.getBackground().clearColorFilter();
                     v.invalidate();
+                    try {
+                        GetDayDiscriptions(startDate, numOfDays * 2, c);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
                 }
 
@@ -283,16 +295,15 @@ public class Calender extends AppCompatActivity {
         cal.setTime(now);
         JSONArray b = new JSONArray();
         dateFormat = new SimpleDateFormat("EEEE MMM dd, ");
-
-        for (int i = 0; i < numOfDays; i++) {
+        cal.add(Calendar.DATE, numOfDays);
+        for (int i = 0; i < numOfDays + cellOffset; i++) {
             JSONObject a = new JSONObject();
-            cal.add(Calendar.DATE, 1);  // number of days to add
+            cal.add(Calendar.DATE, -1);  // number of days to add
             now = cal.getTime();  // dt is now the new date
 
             c.today = now;
 
             c.init();
-
 
 
             String dateDay = dateFormat.format(now);
@@ -301,7 +312,7 @@ public class Calender extends AppCompatActivity {
             String f = dateDay + c.getDayDescription();
             inflater.inflate(R.layout.cafemenucell, s);
 
-            TextView txt = (TextView) s.getChildAt(numOfDays - (i + 1));
+            TextView txt = (TextView) s.getChildAt(i + 1);
             txt.setId(i + 1);
             txt.getLayoutParams().height = cellHeight;
             txt.getBackground().clearColorFilter();
@@ -312,10 +323,19 @@ public class Calender extends AppCompatActivity {
                 txt.setBackgroundColor(getResources().getColor(R.color.secondary));
 
             }
-            Log.println(Log.ASSERT, "Today", dateFormat.format(d));
 
             if (f.contains(dateFormat.format(d))) {
-                txt.getBackground().setColorFilter(Color.parseColor("#AAFFFFFF"), PorterDuff.Mode.SRC_ATOP);
+                txt.setBackgroundColor(Color.rgb(255, 216, 0));
+                final View today = txt;
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int vLeft = today.getTop();
+                        int vRight = today.getBottom();
+                        int sWidth = scroll.getHeight();
+                        scroll.scrollTo(0, (vLeft + vRight - sWidth) / 2);
+                    }
+                });
             }
 
             txt.requestLayout();
@@ -324,7 +344,7 @@ public class Calender extends AppCompatActivity {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
 
-                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
                         v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
                         v.invalidate();
@@ -352,6 +372,7 @@ public class Calender extends AppCompatActivity {
             b.put(a);
 
         }
+
         return b.toString();
 
     }
