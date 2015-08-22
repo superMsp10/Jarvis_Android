@@ -1,10 +1,18 @@
 package jarvis.mahan.jarvisandroid;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,7 +38,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class NewsFeed extends AppCompatActivity {
-    private JSONArray menus;
+    private JSONArray news;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -107,7 +115,7 @@ public class NewsFeed extends AppCompatActivity {
                         try {
                             res = sortJsonArray(new JSONArray(response));
 
-                            //  useData(res);
+                            useData(res);
                             // Log.println(Log.ASSERT, "Response from server", res.toString());
                             writeToFile(res.toString());
 
@@ -138,7 +146,8 @@ public class NewsFeed extends AppCompatActivity {
 
                 try {
                     res = new JSONArray(readFromFile());
-                    // useData(res);
+
+                    useData(res);
                     //Log.println(Log.ASSERT, "Data from file", res.toString());
 
                 } catch (JSONException e) {
@@ -183,6 +192,69 @@ public class NewsFeed extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
+
+    }
+
+    void useData(JSONArray data) throws JSONException {
+        news = new JSONArray(data.toString());
+        int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        int cellHeight = displayHeight / 6;
+        LinearLayout s = (LinearLayout) findViewById(R.id.NewsFeedLinearlayout);
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        for (int i = 0; i < data.length(); i++) {
+            String name = data.getJSONObject(i).getString("Title");
+            inflater.inflate(R.layout.cafemenucell, s);
+
+            TextView t = (TextView) s.getChildAt(i);
+            t.setId(i);
+            t.getLayoutParams().height = cellHeight;
+            t.getBackground().clearColorFilter();
+            t.requestLayout();
+            t.setBackgroundColor(getResources().getColor(R.color.secondary));
+
+            t.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                        v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        try {
+                            changeActivity(v.getId());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+
+                    }
+
+
+                    return true;
+                }
+            });
+
+            t.setText(name);
+
+        }
+
+
+    }
+
+
+    void changeActivity(int index) throws JSONException {
+
+        Intent intent;
+        intent = new Intent(this, DetailedCafeMenu.class);
+        String message = news.getString(index);
+        intent.putExtra("News", message);
+
+        startActivity(intent);
 
     }
 
