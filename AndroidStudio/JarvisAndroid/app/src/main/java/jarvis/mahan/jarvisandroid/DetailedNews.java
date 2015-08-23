@@ -3,10 +3,12 @@ package jarvis.mahan.jarvisandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -50,8 +52,17 @@ public class DetailedNews extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        int displayHeight;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
 
-        int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+            displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        } else {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            displayHeight = size.y;
+
+        }
         TextView t = (TextView) findViewById(R.id.newsTitle);
         t.getLayoutParams().height = displayHeight / 6;
         t.setText(title);
@@ -59,7 +70,6 @@ public class DetailedNews extends AppCompatActivity {
 
         t = (TextView) findViewById(R.id.news);
         t.setText(des);
-
 
 
     }

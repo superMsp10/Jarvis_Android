@@ -3,11 +3,13 @@ package jarvis.mahan.jarvisandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -84,7 +86,17 @@ public class MainActivity extends AppCompatActivity {
     void setupUI(String dayDescription) {
 
 
-        int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        int displayHeight;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+            displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        } else {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            displayHeight = size.y;
+
+        }
         int buttonHeight = displayHeight / 6;
 
 

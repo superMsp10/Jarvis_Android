@@ -3,11 +3,13 @@ package jarvis.mahan.jarvisandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -201,7 +203,17 @@ public class CafeMenu extends AppCompatActivity {
 
     void useData(JSONArray data) throws JSONException {
         menus = new JSONArray(data.toString());
-        int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        int displayHeight;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+            displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        } else {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            displayHeight = size.y;
+
+        }
         int cellHeight = displayHeight / 6;
         LinearLayout s = (LinearLayout) findViewById(R.id.CafeLinearlayout);
 

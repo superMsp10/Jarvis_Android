@@ -4,11 +4,13 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,10 +47,22 @@ public class Hub extends AppCompatActivity {
         setTitle("Social HUB");
 
 
-        int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
-        int screenWidth = getWindowManager().getDefaultDisplay().getHeight();
+        int displayHeight = 0;
+        int displayWidth = 0;
 
-        int labelSize = screenHeight / 7;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+            displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        } else {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            displayHeight = size.y;
+            displayWidth = size.x;
+
+        }
+
+        int labelSize = displayHeight / 7;
         int labelPos = (labelSize / 4);
 
 
@@ -57,7 +71,7 @@ public class Hub extends AppCompatActivity {
         View space = new View(this);
         Button b;
         TextView v;
-        space.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, labelPos));
+        space.setLayoutParams(new LinearLayout.LayoutParams(displayWidth, labelPos));
 
 
         //Instagram
@@ -180,7 +194,7 @@ public class Hub extends AppCompatActivity {
         v.invalidate();
 
         space = new View(this);
-        space.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, labelPos));
+        space.setLayoutParams(new LinearLayout.LayoutParams(displayWidth, labelPos));
         s.addView(space, 3);
 
         //Jarvis Website
@@ -240,7 +254,7 @@ public class Hub extends AppCompatActivity {
         v.invalidate();
 
         space = new View(this);
-        space.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, labelPos));
+        space.setLayoutParams(new LinearLayout.LayoutParams(displayWidth, labelPos));
         s.addView(space, 5);
 
         //Facebook
@@ -296,7 +310,7 @@ public class Hub extends AppCompatActivity {
         v.invalidate();
 
         space = new View(this);
-        space.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, labelPos));
+        space.setLayoutParams(new LinearLayout.LayoutParams(displayWidth, labelPos));
         s.addView(space, 7);
         //Emails
         inflater.inflate(R.layout.hub_cell, s);
@@ -306,8 +320,6 @@ public class Hub extends AppCompatActivity {
         v.getLayoutParams().height = labelSize;
         v.setBackgroundColor(getResources().getColor(R.color.primary));
         v.setText("Be sure to send us your feedback at jarvisCIApp@gmail.com");
-
-
 
 
     }
