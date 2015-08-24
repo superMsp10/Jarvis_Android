@@ -21,6 +21,10 @@ class DayCalculator {
     private JSONArray noSchoolDays;
     private SimpleDateFormat dateFormat;
 
+    //Schedule Stuff
+    private String startTimes[];
+    private String endTimes[];
+
 
     public DayCalculator(JSONArray data, Date date) throws ParseException {
         serverData = data;
@@ -39,6 +43,8 @@ class DayCalculator {
         sept = dateFormat.parse("1 September 2015");
         dateFormat = new SimpleDateFormat("LLLL");
         JSONObject j;
+
+
         for (int i = 0; i < serverData.length(); i++) {
             try {
                 j = serverData.getJSONObject(i);
@@ -61,7 +67,16 @@ class DayCalculator {
         //  int days = daysSinceStart(today);
         // Log.println(Log.ASSERT, "Days", Integer.toString(days));
         //Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
+        dateFormat = new SimpleDateFormat("EEEEE");
 
+        if (dateFormat.format(today) == "Wednesday") {
+            startTimes = new String[]{"10:10 AM", "11:10 AM", "12:05 AM", "1:05 PM", "2:05 PM"};
+            endTimes = new String[]{"11:05 AM", "12:05 AM", "1:00 PM", "2:00 PM", "3:00 PM"};
+        } else {
+
+            startTimes = new String[]{"8:50 AM", "10:10 AM", "11:25 AM", "12:25 PM", "1:45 PM"};
+            endTimes = new String[]{"10:05 AM", "11:25 AM", "12:25 PM", "1:40 PM", "3:00 PM"};
+        }
 
     }
 
