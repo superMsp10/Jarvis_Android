@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -148,6 +149,55 @@ public class MainActivity extends AppCompatActivity {
         String date = dateFormat.format(d);
         dateFormat = new SimpleDateFormat("EEEE");
         String day = dateFormat.format(d);
+        String schedule = null;
+
+        try {
+            InputStream inputStream = openFileInput("Schedule.txt");
+
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString;
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                schedule = stringBuilder.toString();
+            }
+        } catch (FileNotFoundException e) {
+
+            JSONObject j = new JSONObject();
+            try {
+
+                j.put("lunch", "Lunch");
+                j.put("perA", "Period A");
+                j.put("perB", "Period B");
+                j.put("perC", "Period C");
+                j.put("perD", "Period D");
+                j.put("perE", "Period E");
+                j.put("perF", "Period F");
+                j.put("perG", "Period G");
+                j.put("perH", "Period H");
+
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+            schedule = j.toString();
+
+            Log.e("login activity", "File not found: " + e.toString());
+            try {
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("Schedule.txt", Context.MODE_PRIVATE));
+                outputStreamWriter.write(schedule);
+                outputStreamWriter.close();
+            } catch (IOException i) {
+                Log.e("Exception", "File write failed: " + e.toString());
+            }
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
 
 
         text.setText(day + date);
