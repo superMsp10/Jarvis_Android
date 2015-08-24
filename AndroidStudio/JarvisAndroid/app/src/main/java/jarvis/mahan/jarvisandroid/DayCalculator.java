@@ -239,4 +239,82 @@ class DayCalculator {
     } */
 
 
+    String getKey(int day, int row) {
+        String key = null;
+        switch (day) {
+            case 1: {
+                if (row == 0) {
+                    key = "perA";
+                } else if (row == 1) {
+                    key = "perB";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perC";
+                } else if (row == 4) {
+                    key = "perD";
+                }
+                break;
+
+            }
+
+
+            case 2: {
+                if (row == 0) {
+                    key = "perE";
+                } else if (row == 1) {
+                    key = "perF";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perG";
+                } else if (row == 4) {
+                    key = "perH";
+                }
+                break;
+
+            }
+
+            case 3: {
+                if (row == 0) {
+                    key = "perB";
+                } else if (row == 1) {
+                    key = "perA";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perD";
+                } else if (row == 4) {
+                    key = "perC";
+                }
+                break;
+
+            }
+
+
+            case 4: {
+                if (row == 0) {
+                    key = "perF";
+                } else if (row == 1) {
+                    key = "perE";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perH";
+                } else if (row == 4) {
+                    key = "perG";
+                }
+                break;
+
+            }
+
+
+        }
+
+        return key;
+
+
+    }
+
+
 }
