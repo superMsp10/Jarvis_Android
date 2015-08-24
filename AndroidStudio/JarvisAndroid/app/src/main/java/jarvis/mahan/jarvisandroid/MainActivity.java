@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-        /* try {
-            d = dateFormat.parse("16 october 2015 00 00 00");
+         try {
+            d = dateFormat.parse("8 september 2015 8 49 00");
         } catch (ParseException e) {
             e.printStackTrace();
-        }*/
-        d = new Date();
+        }
+     //   d =new Date();
 
 
         getCalcData();
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void setupUI(String dayDescription) {
+    void setupUI(String dayDescription, String schedule) {
 
 
         int displayHeight;
@@ -149,56 +149,6 @@ public class MainActivity extends AppCompatActivity {
         String date = dateFormat.format(d);
         dateFormat = new SimpleDateFormat("EEEE");
         String day = dateFormat.format(d);
-        String schedule = null;
-
-        try {
-            InputStream inputStream = openFileInput("Schedule.txt");
-
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString;
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ((receiveString = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(receiveString);
-                }
-
-                inputStream.close();
-                schedule = stringBuilder.toString();
-            }
-        } catch (FileNotFoundException e) {
-
-            JSONObject j = new JSONObject();
-            try {
-
-                j.put("lunch", "Lunch");
-                j.put("perA", "Period A");
-                j.put("perB", "Period B");
-                j.put("perC", "Period C");
-                j.put("perD", "Period D");
-                j.put("perE", "Period E");
-                j.put("perF", "Period F");
-                j.put("perG", "Period G");
-                j.put("perH", "Period H");
-
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-            }
-            schedule = j.toString();
-
-            Log.e("login activity", "File not found: " + e.toString());
-            try {
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("Schedule.txt", Context.MODE_PRIVATE));
-                outputStreamWriter.write(schedule);
-                outputStreamWriter.close();
-            } catch (IOException i) {
-                Log.e("Exception", "File write failed: " + e.toString());
-            }
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        }
-
 
         text.setText(day + date);
 
@@ -239,6 +189,9 @@ public class MainActivity extends AppCompatActivity {
         return rs;
 
     }
+
+
+
 
 
     void getCalcData() {
@@ -344,8 +297,68 @@ public class MainActivity extends AppCompatActivity {
     void useData(JSONArray data) {
         try {
             DayCalculator calc = new DayCalculator(data, d);
+            JSONObject j = null;
+            String schedule = null;
 
-            setupUI(calc.getDayDescription());
+            try {
+                InputStream inputStream = openFileInput("Schedule.txt");
+
+                if (inputStream != null) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String receiveString;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((receiveString = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(receiveString);
+                    }
+
+                    inputStream.close();
+                    try {
+                        j = new JSONObject( stringBuilder.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (FileNotFoundException e) {
+
+                try {
+
+                    j.put("lunch", "Lunch");
+                    j.put("perA", "Period A");
+                    j.put("perB", "Period B");
+                    j.put("perC", "Period C");
+                    j.put("perD", "Period D");
+                    j.put("perE", "Period E");
+                    j.put("perF", "Period F");
+                    j.put("perG", "Period G");
+                    j.put("perH", "Period H");
+
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+
+
+                Log.e("login activity", "File not found: " + e.toString());
+                try {
+                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("Schedule.txt", Context.MODE_PRIVATE));
+                    outputStreamWriter.write(j.toString());
+                    outputStreamWriter.close();
+                } catch (IOException i) {
+                    Log.e("Exception", "File write failed: " + e.toString());
+                }
+            } catch (IOException e) {
+                Log.e("login activity", "Can not read file: " + e.toString());
+            }
+            try {
+                 schedule = calc.getPeriod(calc.checkDay(),j);
+                Log.println(Log.ASSERT, "schedule", schedule);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            setupUI(calc.getDayDescription(),schedule);
 
 
         } catch (ParseException e) {

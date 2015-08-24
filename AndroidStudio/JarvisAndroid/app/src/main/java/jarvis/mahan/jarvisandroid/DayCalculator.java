@@ -1,11 +1,16 @@
 package jarvis.mahan.jarvisandroid;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Time;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -193,7 +198,7 @@ class DayCalculator {
                 if (reason.contains("Special Schedule")) {
                     dayDescription = "Special Schedule, check News Feed for details";
                 } else
-                dayDescription = ("No School " + reason);
+                    dayDescription = ("No School " + reason);
 
                 return -1;
 
@@ -238,8 +243,63 @@ class DayCalculator {
         Log.println(Log.ASSERT, "Difference",Long.toString(elapsedDays));
     } */
 
+    public String getPeriod(int day, JSONObject j) throws ParseException {
 
-    String getKey(int day, int row) {
+        dateFormat = new SimpleDateFormat("hh:mm a");
+
+
+        Date schoolStart = dateFormat.parse(startTimes[0]);
+        Date schoolEnd = dateFormat.parse(endTimes[endTimes.length - 1]);
+
+        float timeNow = timeAsIntegerFromDate(today);
+       //Log.println(Log.ASSERT, "Time Now",String.valueOf(timeNow));
+      // Log.println(Log.ASSERT, "Time Start",String.valueOf(timeAsIntegerFromDate(schoolStart)));
+
+
+        if (timeNow < timeAsIntegerFromDate(schoolStart)) {
+
+            return "Before School";
+        } else if (timeNow > timeAsIntegerFromDate(schoolEnd)) {
+            return "After School";
+        } else {
+
+            for (int i = 0; i < endTimes.length; i++) {
+
+                Date timeFrame = dateFormat.parse(endTimes[i]);
+
+                if (timeNow < timeAsIntegerFromDate(timeFrame)) {
+
+                    try {
+                        return j.getString(getKey(day, i));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+
+        }
+
+        return "hjh";
+    }
+
+
+    float timeAsIntegerFromDate(Date date) {
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+
+        float Hr = c.get(Calendar.HOUR_OF_DAY) * 100;
+        float Min = c.get(Calendar.MINUTE);
+
+
+
+        return Hr + Min;
+    }
+
+
+    public String getKey(int day, int row) {
         String key = null;
         switch (day) {
             case 1: {
