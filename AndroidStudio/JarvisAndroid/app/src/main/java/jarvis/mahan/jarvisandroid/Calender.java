@@ -45,9 +45,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class Calender extends AppCompatActivity {
-    private Date d;
+    public static Date d;
     private SimpleDateFormat dateFormat;
-    private String[] stringsOfDays;
+    private JSONArray stringsOfDays;
     int cellOffset;
     int nOfDays;
 
@@ -71,23 +71,26 @@ public class Calender extends AppCompatActivity {
                         .build()
         );
         setTitle("Calendar");
-
-        Intent intent = getIntent();
-        String message = intent.getStringExtra("Date");
-        dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-
         nOfDays = 30;
         cellOffset = 15;
 
-        try {
-            d = dateFormat.parse(message);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        //  Log.println(Log.ASSERT, "date", message);
+      /*  Intent intent = getIntent();
+        String message = intent.getStringExtra("Date");
+
+        if (message != null) {
+
+            dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
 
 
+            try {
+                d = dateFormat.parse(message);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }*/
         getCalcData();
+
 
     }
 
@@ -228,7 +231,7 @@ public class Calender extends AppCompatActivity {
         try {
             DayCalculator calc = new DayCalculator(data, d);
             try {
-                GetDayDiscriptions(d, nOfDays, calc);
+                stringsOfDays = GetDayDiscriptions(d, nOfDays, calc);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -242,7 +245,7 @@ public class Calender extends AppCompatActivity {
     }
 
 
-    private String GetDayDiscriptions(final Date startDate, final int numOfDays, final DayCalculator c) throws JSONException, ParseException {
+    private JSONArray GetDayDiscriptions(final Date startDate, final int numOfDays, final DayCalculator c) throws JSONException, ParseException {
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
         int cellHeight = displayHeight / 6;
@@ -321,7 +324,31 @@ public class Calender extends AppCompatActivity {
                 txt.setBackgroundColor(getResources().getColor(R.color.primary));
             } else {
                 txt.setBackgroundColor(getResources().getColor(R.color.secondary));
+                txt.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
 
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                            v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
+                            v.invalidate();
+
+
+                        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                            changeToSchedule(v.getId());
+
+                        } else {
+
+                            v.getBackground().clearColorFilter();
+                            v.invalidate();
+
+                        }
+
+
+                        return true;
+                    }
+                });
             }
 
             if (f.contains(dateFormat.format(d))) {
@@ -340,27 +367,6 @@ public class Calender extends AppCompatActivity {
 
             txt.requestLayout();
 
-            txt.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                        v.getBackground().setColorFilter(Color.parseColor("#AA000000"), PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-
-
-                    } else {
-
-                        v.getBackground().clearColorFilter();
-                        v.invalidate();
-
-                    }
-
-
-                    return true;
-                }
-            });
 
             txt.setText(f);
 
@@ -373,7 +379,24 @@ public class Calender extends AppCompatActivity {
 
         }
 
-        return b.toString();
+        return b;
+
+    }
+
+    void changeToSchedule(int i) {
+
+        Intent intent;
+        intent = new Intent(this, Schedule.class);
+
+        String message = null;
+        try {
+            message = stringsOfDays.getJSONObject(i - 1).toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        intent.putExtra("Date", message);
+        startActivity(intent);
+
 
     }
 

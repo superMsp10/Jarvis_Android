@@ -71,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-         try {
+        try {
             d = dateFormat.parse("8 september 2015 8 49 00");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-     //   d =new Date();
+        //   d =new Date();
 
-
+        Calender.d = d;
         getCalcData();
 
 
@@ -189,9 +189,6 @@ public class MainActivity extends AppCompatActivity {
         return rs;
 
     }
-
-
-
 
 
     void getCalcData() {
@@ -315,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
 
                     inputStream.close();
                     try {
-                        j = new JSONObject( stringBuilder.toString());
+                        j = new JSONObject(stringBuilder.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -351,14 +348,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("login activity", "Can not read file: " + e.toString());
             }
             try {
-                 schedule = calc.getPeriod(calc.checkDay(),j);
+                schedule = calc.getPeriod(calc.checkDay(), j);
                 Log.println(Log.ASSERT, "schedule", schedule);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            setupUI(calc.getDayDescription(),schedule);
+            setupUI(calc.getDayDescription(), schedule);
 
 
         } catch (ParseException e) {
@@ -421,6 +418,8 @@ public class MainActivity extends AppCompatActivity {
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
         String message = dateFormat.format(d);
         intent.putExtra("Date", message);
+        intent.putExtra("Activity", "main");
+
         startActivity(intent);
 
     }

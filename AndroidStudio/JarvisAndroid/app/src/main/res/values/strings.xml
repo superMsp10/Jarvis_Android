@@ -11,4 +11,5 @@
     <string name="title_activity_hub_link">HubLinkActivity</string>
     <string name="title_activity_news_feed">NewsFeed</string>
     <string name="title_activity_detailed_news">News</string>
+    <string name="title_activity_schedule">Schedule</string>
 </resources>
