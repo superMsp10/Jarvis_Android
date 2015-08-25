@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:weightSum="1"
     android:background="@color/secondary"
     android:gravity="center">
@@ -14,7 +14,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingBottom="5dp"
         android:text="Start Time"
-        android:id="@+id/StartTimetext"
+        android:id="@+id/StartTime"
         android:textAlignment="center"
         android:textSize="28dp"
         android:gravity="center"
@@ -28,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingBottom="5dp"
         android:text="Event"
-        android:id="@+id/EventText"
+        android:id="@+id/Event"
         android:textAlignment="center"
         android:textSize="28dp"
         android:gravity="center|left"
@@ -36,7 +36,10 @@
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
         android:paddingLeft="5dp"
-        android:background="@drawable/edit_text" />
+        android:background="@drawable/edit_text"
+        android:clickable="true"
+        android:editable="true"
+        android:enabled="true" />
 
     <TextView
         android:layout_width="120dp"
@@ -44,7 +47,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingBottom="5dp"
         android:text="End Time"
-        android:id="@+id/EndTimeText"
+        android:id="@+id/EndTime"
         android:textAlignment="center"
         android:textSize="28dp"
         android:gravity="center"
