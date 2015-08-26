@@ -9,7 +9,7 @@
     android:layout_marginBottom="1dp">
 
 
-<TextView
+    <TextView
         android:layout_width="125dp"
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -35,12 +35,12 @@
         android:textStyle="bold"
         android:background="@drawable/edit_text"
         android:clickable="true"
-        android:editable="true"
         android:enabled="true"
         android:focusable="true"
         android:inputType="text"
         android:singleLine="true"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="5dp"
+        android:imeOptions="actionDone" />
 
     <TextView
         android:layout_width="120dp"

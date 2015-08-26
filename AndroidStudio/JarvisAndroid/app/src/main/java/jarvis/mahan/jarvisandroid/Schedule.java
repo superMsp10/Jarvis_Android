@@ -10,9 +10,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -257,21 +258,32 @@ public class Schedule extends AppCompatActivity {
             t.getLayoutParams().height = cellHeight;
             t.getLayoutParams().width = labelWidth;
             t.setText(event);
-            t.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
+            t.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
-               /*     if (event.getAction() == MotionEvent.ACTION_HOVER_EXIT) {
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        Log.println(Log.ASSERT, "day", ((TextView) v).getText().toString());
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        //do job here when Edittext lose focus
+                        // Log.println(Log.ASSERT, "Edioted text", );
+                        setText(((TextView) v).getText().toString(), day, v.getId());
 
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                        return false;
-                    }*/
-
-                    return false;
+                    }
                 }
             });
+
+            t.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if ((actionId == EditorInfo.IME_ACTION_DONE) || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER))) {
+                        //   Log.println(Log.ASSERT, "return text", v.getText().toString());
+                        setText((v).getText().toString(), day, v.getId());
+
+                        return false;
+                    } else {
+                        return false;
+                    }
+                }
+            });
+
             t.requestLayout();
 
             t = (TextView) findViewById(R.id.StartTime);
@@ -279,13 +291,6 @@ public class Schedule extends AppCompatActivity {
             t.getLayoutParams().height = cellHeight;
             t.getLayoutParams().width = labelWidth;
             t.setText(startTimes[i]);
-            t.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-
-                    return true;
-                }
-            });
             t.requestLayout();
 
 
@@ -294,17 +299,101 @@ public class Schedule extends AppCompatActivity {
             t.getLayoutParams().height = cellHeight;
             t.getLayoutParams().width = labelWidth;
             t.setText(endTimes[i]);
-            t.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
 
-
-                    return true;
-                }
-            });
             t.requestLayout();
 
 
+        }
+
+
+    }
+
+
+    void setText(String message, int day, int row) {
+        String key = null;
+
+        switch (day) {
+            case 1: {
+                if (row == 0) {
+                    key = "perA";
+                } else if (row == 1) {
+                    key = "perB";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perC";
+                } else if (row == 4) {
+                    key = "perD";
+                }
+                break;
+
+            }
+
+
+            case 2: {
+                if (row == 0) {
+                    key = "perE";
+                } else if (row == 1) {
+                    key = "perF";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perG";
+                } else if (row == 4) {
+                    key = "perH";
+                }
+                break;
+
+            }
+
+            case 3: {
+                if (row == 0) {
+                    key = "perB";
+                } else if (row == 1) {
+                    key = "perA";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perD";
+                } else if (row == 4) {
+                    key = "perC";
+                }
+                break;
+
+            }
+
+
+            case 4: {
+                if (row == 0) {
+                    key = "perF";
+                } else if (row == 1) {
+                    key = "perE";
+                } else if (row == 2) {
+                    key = "lunch";
+                } else if (row == 3) {
+                    key = "perH";
+                } else if (row == 4) {
+                    key = "perG";
+                }
+                break;
+
+            }
+
+
+        }
+        if (key != null) {
+            try {
+                periods.put(key, message);
+                try {
+                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("Schedule.txt", Context.MODE_PRIVATE));
+                    outputStreamWriter.write(periods.toString());
+                    outputStreamWriter.close();
+                } catch (IOException i) {
+                    Log.e("Exception", "File write failed: " + i.toString());
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
 

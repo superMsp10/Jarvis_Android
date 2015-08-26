@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-        try {
+       /* try {
             d = dateFormat.parse("8 september 2015 8 49 00");
         } catch (ParseException e) {
             e.printStackTrace();
-        }
-        //   d =new Date();
+        }*/
+        d = new Date();
 
         Calender.d = d;
         getCalcData();
@@ -154,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
 
         text = (TextView) findViewById(R.id.dayAndPeriodLabel);
         text.getLayoutParams().height = buttonHeight / 3;
-        text.setText(dayDescription);
+        if (!dayDescription.contains("No School")) {
+            text.setText(dayDescription + ", " + schedule);
+        } else text.setText(dayDescription);
 
 
     }
@@ -348,8 +350,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("login activity", "Can not read file: " + e.toString());
             }
             try {
-                schedule = calc.getPeriod(calc.checkDay(), j);
-                Log.println(Log.ASSERT, "schedule", schedule);
+                int day = calc.checkDay();
+                if (day != -1)
+                    schedule = calc.getPeriod(day, j);
 
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -276,7 +276,7 @@ public class Calender extends AppCompatActivity {
                     v.getBackground().clearColorFilter();
                     v.invalidate();
                     try {
-                        GetDayDiscriptions(startDate, numOfDays * 2, c);
+                        stringsOfDays = GetDayDiscriptions(startDate, numOfDays * 2, c);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (ParseException e) {
