@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class Schedule extends AppCompatActivity {
     String[] dayThree;
     String[] dayFour;
     JSONObject periods;
+    int day;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -61,6 +63,7 @@ public class Schedule extends AppCompatActivity {
         String message = intent.getStringExtra("Date");
         try {
             JSONObject j = new JSONObject(message);
+            day = j.getInt("day");
             setTitle("Schedule: Day " + j.getString("day"));
             message = j.getString("dayDis");
 
@@ -117,7 +120,7 @@ public class Schedule extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        setupUI();
     }
 
     JSONObject getData() {
@@ -203,30 +206,27 @@ public class Schedule extends AppCompatActivity {
         int labelWidth;
         int labelHeight;
 
-        cellHeight = displayHeight / 6;
+        cellHeight = displayHeight / 7;
 
         labelWidth = (int) (screenWidth / 2.9);
         labelHeight = cellHeight / 2;
 
-        View txt = findViewById(R.id.StartTimeText);
-        txt.getLayoutParams().height = labelHeight;
-        txt.getLayoutParams().width = labelWidth;
-
-        txt.requestLayout();
-
-        txt = findViewById(R.id.EventText);
-        txt.getLayoutParams().height = labelHeight;
-        txt.getLayoutParams().width = labelWidth;
-
-        txt.requestLayout();
-
-        txt = findViewById(R.id.EndTimeText);
+        TextView txt = (TextView) findViewById(R.id.StartTimeText);
         txt.getLayoutParams().height = labelHeight;
         txt.getLayoutParams().width = labelWidth;
         txt.requestLayout();
 
-        txt = findViewById(R.id.LabelLayout);
-        txt.getBackground().setColorFilter(Color.parseColor("#55000000"), PorterDuff.Mode.SRC_ATOP);
+        txt = (TextView) findViewById(R.id.EventText);
+        txt.getLayoutParams().height = labelHeight;
+        txt.getLayoutParams().width = labelWidth;
+        txt.requestLayout();
+
+        txt = (TextView) findViewById(R.id.EndTimeText);
+        txt.getLayoutParams().height = labelHeight;
+        txt.getLayoutParams().width = labelWidth;
+        txt.requestLayout();
+
+        findViewById(R.id.LabelLayout).getBackground().setColorFilter(Color.parseColor("#55000000"), PorterDuff.Mode.SRC_ATOP);
 
         LinearLayout s = (LinearLayout) findViewById(R.id.ScheduleLayout);
 
@@ -235,22 +235,73 @@ public class Schedule extends AppCompatActivity {
         for (int i = 0; i < 5; i++) {
             inflater.inflate(R.layout.schedule_cell, s);
 
+            String event = null;
+            switch (day) {
+                case 1:
+                    event = dayOne[i];
+
+                    break;
+                case 2:
+                    event = dayTwo[i];
+                    break;
+                case 3:
+                    event = dayThree[i];
+                    break;
+                case 4:
+                    event = dayFour[i];
+                    break;
+            }
+
             t = (TextView) findViewById(R.id.Event);
             t.setId(i);
             t.getLayoutParams().height = cellHeight;
-            t.getLayoutParams().height = labelWidth;
+            t.getLayoutParams().width = labelWidth;
+            t.setText(event);
+            t.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+               /*     if (event.getAction() == MotionEvent.ACTION_HOVER_EXIT) {
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        Log.println(Log.ASSERT, "day", ((TextView) v).getText().toString());
+
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        return false;
+                    }*/
+
+                    return false;
+                }
+            });
             t.requestLayout();
 
             t = (TextView) findViewById(R.id.StartTime);
             t.setId(i);
             t.getLayoutParams().height = cellHeight;
-            t.getLayoutParams().height = labelWidth;
+            t.getLayoutParams().width = labelWidth;
+            t.setText(startTimes[i]);
+            t.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    return true;
+                }
+            });
             t.requestLayout();
+
 
             t = (TextView) findViewById(R.id.EndTime);
             t.setId(i);
             t.getLayoutParams().height = cellHeight;
-            t.getLayoutParams().height = labelWidth;
+            t.getLayoutParams().width = labelWidth;
+            t.setText(endTimes[i]);
+            t.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+
+                    return true;
+                }
+            });
             t.requestLayout();
 
 

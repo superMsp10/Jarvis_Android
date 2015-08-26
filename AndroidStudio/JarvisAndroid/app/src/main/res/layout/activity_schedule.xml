@@ -15,10 +15,11 @@
         android:background="@color/primary"
         android:gravity="center"
         android:focusableInTouchMode="false"
-        android:id="@+id/LabelLayout">
+        android:id="@+id/LabelLayout"
+        android:layout_marginBottom="1dp">
 
 
-        <TextView
+    <TextView
             android:layout_width="125dp"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
