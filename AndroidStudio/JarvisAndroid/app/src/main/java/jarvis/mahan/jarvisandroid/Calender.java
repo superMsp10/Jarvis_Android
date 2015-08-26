@@ -389,8 +389,10 @@ public class Calender extends AppCompatActivity {
         intent = new Intent(this, Schedule.class);
 
         String message = null;
+
         try {
             message = stringsOfDays.getJSONObject(i - 1).toString();
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

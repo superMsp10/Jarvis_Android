@@ -2,8 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    tools:context="jarvis.mahan.jarvisandroid.Schedule">
+    android:orientation="vertical"
+    tools:context="jarvis.mahan.jarvisandroid.Schedule"
+    android:id="@+id/ScheduleLayout"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -28,7 +30,7 @@
             android:gravity="center"
             android:textColor="#ffffffff"
             android:layout_marginBottom="1dp"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="0dp" />
 
         <TextView
             android:layout_width="120dp"

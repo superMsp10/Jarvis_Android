@@ -19,10 +19,9 @@
         android:textSize="28dp"
         android:gravity="center"
         android:textColor="#ffffffff"
-        android:layout_marginBottom="1dp"
-        android:paddingLeft="5dp" />
+        android:layout_marginBottom="1dp" />
 
-    <TextView
+    <EditText
         android:layout_width="120dp"
         android:layout_height="62dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -35,11 +34,14 @@
         android:textColor="@android:color/black"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
-        android:paddingLeft="5dp"
         android:background="@drawable/edit_text"
         android:clickable="true"
         android:editable="true"
-        android:enabled="true" />
+        android:enabled="true"
+        android:focusable="true"
+        android:inputType="text"
+        android:singleLine="true"
+        android:paddingLeft="5dp" />
 
     <TextView
         android:layout_width="120dp"
@@ -52,7 +54,6 @@
         android:textSize="28dp"
         android:gravity="center"
         android:textColor="#ffffffff"
-        android:layout_marginBottom="1dp"
-        android:paddingLeft="5dp" />
+        android:layout_marginBottom="1dp" />
 
 </LinearLayout>
