@@ -26,7 +26,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/CafeMenuButton"
         android:layout_alignEnd="@+id/CafeMenuButton"
-        android:background="@drawable/hub"
+        android:background="@drawable/hub_image"
         android:clickable="true"
         android:enabled="true"
         android:textColorHighlight="@color/secondary" />
@@ -46,7 +46,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/tohubButton"
         android:layout_alignEnd="@+id/tohubButton"
-        android:background="@drawable/calenar"
+        android:background="@drawable/calendar"
         android:clickable="true"
         android:enabled="true"
         android:textColorHighlight="@color/secondary" />
@@ -63,7 +63,7 @@
         android:layout_alignParentStart="true"
         android:textSize="36sp"
         android:textColor="#FFFFFFFF"
-        android:background="@drawable/pizza"
+        android:background="@drawable/cafe_image_two"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:clickable="true"

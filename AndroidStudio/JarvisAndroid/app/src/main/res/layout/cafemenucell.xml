@@ -7,7 +7,7 @@
     android:text="Large Text"
     android:id="@+id/CafeCellText"
     android:textAlignment="center"
-    android:background="@drawable/pizza"
+    android:background="@drawable/cafe_image_one"
     android:textSize="28dp"
     android:gravity="center"
     android:textColor="#ffffffff"
