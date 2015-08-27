@@ -110,7 +110,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
 
         android:textColor="#ffffffff"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView

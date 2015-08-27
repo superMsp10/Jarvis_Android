@@ -6,20 +6,13 @@
         android:id="@+id/hubCellButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+
         android:background="@drawable/fbicon"/>
 
     <TextView
         android:id="@+id/hubCellTextView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_alignBottom="@+id/button"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@+id/button"
-        android:layout_toRightOf="@+id/button"
         android:background="@color/secondary"
         android:gravity="center"
         android:text="Face book Iconc "
@@ -27,7 +20,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff"
         android:layout_gravity="center_horizontal"
-        android:textSize="28dp" />
+        android:textSize="28sp" />
 
 
 </LinearLayout>

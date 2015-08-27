@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
                         .build()
         );
 
-        setTitle("Jarvis");
-
 
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
        /* try {
@@ -244,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     res = new JSONArray(readFromFile());
-                    if (res != null)
+                    if (res.length() > 0)
                         useData(res);
                     //Log.println(Log.ASSERT, "Data from file", res.toString());
 

@@ -8,7 +8,7 @@
     android:id="@+id/CafeCellText"
     android:textAlignment="center"
     android:background="@drawable/cafe_image_one"
-    android:textSize="28dp"
+    android:textSize="28sp"
     android:gravity="center"
     android:textColor="#ffffffff"
     android:layout_marginBottom="1dp" />

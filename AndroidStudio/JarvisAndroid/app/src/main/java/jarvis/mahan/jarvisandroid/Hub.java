@@ -47,7 +47,7 @@ public class Hub extends AppCompatActivity {
         setTitle("Social HUB");
 
 
-        int displayHeight = 0;
+        int displayHeight;
         int displayWidth = 0;
 
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {

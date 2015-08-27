@@ -32,14 +32,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class Schedule extends AppCompatActivity {
-    String[] startTimes;
-    String[] endTimes;
-    String[] dayOne;
-    String[] dayTwo;
-    String[] dayThree;
-    String[] dayFour;
-    JSONObject periods;
-    int day;
+    private String[] startTimes;
+    private String[] endTimes;
+    private String[] dayOne;
+    private String[] dayTwo;
+    private String[] dayThree;
+    private String[] dayFour;
+    private JSONObject periods;
+    private int day;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -126,7 +126,6 @@ public class Schedule extends AppCompatActivity {
 
     JSONObject getData() {
         JSONObject j = null;
-        String schedule = null;
 
         try {
             InputStream inputStream = openFileInput("Schedule.txt");
@@ -232,7 +231,7 @@ public class Schedule extends AppCompatActivity {
         LinearLayout s = (LinearLayout) findViewById(R.id.ScheduleLayout);
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        TextView t = null;
+        TextView t;
         for (int i = 0; i < 5; i++) {
             inflater.inflate(R.layout.schedule_cell, s);
 
@@ -310,77 +309,10 @@ public class Schedule extends AppCompatActivity {
 
 
     void setText(String message, int day, int row) {
-        String key = null;
+        String key;
 
-        switch (day) {
-            case 1: {
-                if (row == 0) {
-                    key = "perA";
-                } else if (row == 1) {
-                    key = "perB";
-                } else if (row == 2) {
-                    key = "lunch";
-                } else if (row == 3) {
-                    key = "perC";
-                } else if (row == 4) {
-                    key = "perD";
-                }
-                break;
+        key = DayCalculator.getKey(day, row);
 
-            }
-
-
-            case 2: {
-                if (row == 0) {
-                    key = "perE";
-                } else if (row == 1) {
-                    key = "perF";
-                } else if (row == 2) {
-                    key = "lunch";
-                } else if (row == 3) {
-                    key = "perG";
-                } else if (row == 4) {
-                    key = "perH";
-                }
-                break;
-
-            }
-
-            case 3: {
-                if (row == 0) {
-                    key = "perB";
-                } else if (row == 1) {
-                    key = "perA";
-                } else if (row == 2) {
-                    key = "lunch";
-                } else if (row == 3) {
-                    key = "perD";
-                } else if (row == 4) {
-                    key = "perC";
-                }
-                break;
-
-            }
-
-
-            case 4: {
-                if (row == 0) {
-                    key = "perF";
-                } else if (row == 1) {
-                    key = "perE";
-                } else if (row == 2) {
-                    key = "lunch";
-                } else if (row == 3) {
-                    key = "perH";
-                } else if (row == 4) {
-                    key = "perG";
-                }
-                break;
-
-            }
-
-
-        }
         if (key != null) {
             try {
                 periods.put(key, message);

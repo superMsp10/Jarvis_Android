@@ -1,75 +1,73 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScheduleScroll"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="jarvis.mahan.jarvisandroid.Schedule"
-    android:id="@+id/ScheduleScroll"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    tools:context="jarvis.mahan.jarvisandroid.Schedule">
 
     <LinearLayout
+        android:id="@+id/ScheduleLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
-        tools:context="jarvis.mahan.jarvisandroid.Schedule"
-        android:id="@+id/ScheduleLayout"
-        android:focusableInTouchMode="true">
+        tools:context="jarvis.mahan.jarvisandroid.Schedule">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:id="@+id/LabelLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
+            android:layout_marginBottom="1dp"
             android:background="@color/primary"
-            android:gravity="center"
             android:focusableInTouchMode="false"
-            android:id="@+id/LabelLayout"
-            android:layout_marginBottom="1dp">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
 
             <TextView
+                android:id="@+id/StartTimeText"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
                 android:paddingBottom="5dp"
                 android:text="Start Time"
-                android:id="@+id/StartTimeText"
                 android:textAlignment="center"
-                android:textSize="28dp"
-                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ffffffff"
-                android:layout_marginBottom="1dp"
-                android:paddingLeft="0dp" />
+                android:textSize="28sp" />
 
             <TextView
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:paddingBottom="5dp"
-                android:text="Event"
                 android:id="@+id/EventText"
-                android:textAlignment="center"
-                android:textSize="28dp"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="1dp"
-                android:paddingLeft="5dp"
-                android:clickable="false"
-                android:editable="false"
-                android:enabled="false" />
-
-            <TextView
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:paddingBottom="5dp"
-                android:text="End Time"
-                android:id="@+id/EndTimeText"
-                android:textAlignment="center"
-                android:textSize="28dp"
-                android:gravity="center"
-                android:textColor="#ffffffff"
                 android:layout_marginBottom="1dp"
-                android:paddingLeft="5dp" />
+                android:clickable="false"
+                android:enabled="false"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:text="Event"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/EndTimeText"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:text="End Time"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffffff"
+                android:textSize="28sp" />
 
         </LinearLayout>
 

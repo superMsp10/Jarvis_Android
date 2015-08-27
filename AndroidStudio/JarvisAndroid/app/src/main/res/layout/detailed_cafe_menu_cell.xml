@@ -7,7 +7,7 @@
     android:text="Large Text"
     android:id="@+id/DetailedCafeCellText"
     android:textAlignment="center"
-    android:textSize="28dp"
+    android:textSize="28sp"
     android:gravity="center"
     android:textColor="#ffffffff"
     android:layout_marginBottom="1dp"

@@ -1,14 +1,10 @@
 <resources>
-    <string name="app_name">JarvisAndroid</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Jarvis</string>
     <string name="title_activity_hub">Hub</string>
     <string name="title_activity_calender">Calender</string>
-    <string name="title_activity_cafe_menu">CafeMenu</string>
-    <string name="title_activity_detailed_cafe_menu">DetailedCafeMenu</string>
+    <string name="title_activity_cafe_menu">Cafeteria Menu</string>
+    <string name="title_activity_detailed_cafe_menu">Menu</string>
     <string name="title_activity_detailed">detailed</string>
-    <string name="title_activity_hub_link">HubLinkActivity</string>
     <string name="title_activity_news_feed">NewsFeed</string>
     <string name="title_activity_detailed_news">News</string>
     <string name="title_activity_schedule">Schedule</string>

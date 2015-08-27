@@ -48,8 +48,8 @@ public class Calender extends AppCompatActivity {
     public static Date d;
     private SimpleDateFormat dateFormat;
     private JSONArray stringsOfDays;
-    int cellOffset;
-    int nOfDays;
+    private int cellOffset;
+    private int nOfDays;
 
 
     @Override

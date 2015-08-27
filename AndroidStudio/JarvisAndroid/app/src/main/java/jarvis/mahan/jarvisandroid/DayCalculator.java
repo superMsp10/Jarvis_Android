@@ -1,13 +1,11 @@
 package jarvis.mahan.jarvisandroid;
 
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Time;
-import java.text.Format;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,7 +20,7 @@ class DayCalculator {
     private int staticSeptemberDayOffset;
     private String dayDescription;
     private String monthName = null;
-    private JSONArray serverData;
+    final private JSONArray serverData;
     private JSONArray noSchoolDays;
     private SimpleDateFormat dateFormat;
 
@@ -74,7 +72,7 @@ class DayCalculator {
         //Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
         dateFormat = new SimpleDateFormat("EEEEE");
 
-        if (dateFormat.format(today) == "Wednesday") {
+        if (dateFormat.format(today).equals("Wednesday")) {
             startTimes = new String[]{"10:10 AM", "11:10 AM", "12:05 AM", "1:05 PM", "2:05 PM"};
             endTimes = new String[]{"11:05 AM", "12:05 AM", "1:00 PM", "2:00 PM", "3:00 PM"};
         } else {
@@ -252,8 +250,8 @@ class DayCalculator {
         Date schoolEnd = dateFormat.parse(endTimes[endTimes.length - 1]);
 
         float timeNow = timeAsIntegerFromDate(today);
-       //Log.println(Log.ASSERT, "Time Now",String.valueOf(timeNow));
-      // Log.println(Log.ASSERT, "Time Start",String.valueOf(timeAsIntegerFromDate(schoolStart)));
+        //Log.println(Log.ASSERT, "Time Now",String.valueOf(timeNow));
+        // Log.println(Log.ASSERT, "Time Start",String.valueOf(timeAsIntegerFromDate(schoolStart)));
 
 
         if (timeNow < timeAsIntegerFromDate(schoolStart)) {
@@ -294,12 +292,11 @@ class DayCalculator {
         float Min = c.get(Calendar.MINUTE);
 
 
-
         return Hr + Min;
     }
 
 
-    public String getKey(int day, int row) {
+    public static String getKey(int day, int row) {
         String key = null;
         switch (day) {
             case 1: {

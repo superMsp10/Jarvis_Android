@@ -42,7 +42,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class CafeMenu extends AppCompatActivity {
     private JSONArray menus;
-    private int[] imageIds = {R.drawable.cafe_image_one, R.drawable.cafe_image_two, R.drawable.cafe_image_three, R.drawable.cafe_image_four, R.drawable.cafe_image_five};
+    final private int[] imageIds = {R.drawable.cafe_image_one, R.drawable.cafe_image_two, R.drawable.cafe_image_three, R.drawable.cafe_image_four, R.drawable.cafe_image_five};
 
     @Override
     protected void attachBaseContext(Context newBase) {
