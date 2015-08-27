@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.println(Log.ASSERT, "Failed database json", "failed");
+                            Log.println(Log.ASSERT, "Failed database json", "Calendar");
 
                         }
 
@@ -244,7 +244,8 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     res = new JSONArray(readFromFile());
-                    useData(res);
+                    if (res != null)
+                        useData(res);
                     //Log.println(Log.ASSERT, "Data from file", res.toString());
 
                 } catch (JSONException e) {
@@ -296,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
     void useData(JSONArray data) {
         try {
             DayCalculator calc = new DayCalculator(data, d);
-            JSONObject j = null;
+            JSONObject j = new JSONObject();
             String schedule = null;
 
             try {

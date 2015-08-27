@@ -1,40 +1,48 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="jarvis.mahan.jarvisandroid.DetailedNews">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="36dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textAlignment="gravity"
-        android:gravity="center"
-        android:background="@color/primary"
-        android:textColor="@android:color/white"
-        android:id="@+id/newsTitle" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="New Text Response from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News Feed"
-        android:id="@+id/news"
-        android:layout_below="@+id/newsTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/newsTitle"
-        android:layout_alignEnd="@+id/newsTitle"
-        android:textSize="24dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/secondary"
-        android:textColor="@android:color/white"
-        android:textAlignment="gravity"
-        android:gravity="left|top"
-        android:paddingLeft="5dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/newsTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/primary"
+            android:gravity="center"
+            android:text="@string/hello_world"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/news"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignEnd="@+id/newsTitle"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/newsTitle"
+            android:layout_below="@+id/newsTitle"
+            android:background="@color/secondary"
+            android:gravity="left|top"
+            android:paddingLeft="5dp"
+            android:text="New Text Response from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News FeedResponse from server﹕ News Feed"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+
+    </LinearLayout>
+</ScrollView>
