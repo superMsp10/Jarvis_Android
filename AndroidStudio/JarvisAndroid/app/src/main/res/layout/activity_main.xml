@@ -1,135 +1,132 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondary"
-    android:theme="@style/CustomActionBarTheme">
-
-
-    tools:context=".MainActivity">
+    android:theme="@style/CustomActionBarTheme"
+    tools:ignore="MissingPrefix">
 
     <Button
 
+        android:id="@+id/tohubButton"
+        fontPath="Capsuula.ttf"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:text="Social Hub"
-        android:id="@+id/tohubButton"
-        android:singleLine="true"
-        android:textSize="36sp"
-        android:textColor="#FFFFFFFF"
-
-        fontPath="Capsuula.ttf"
-        android:layout_below="@+id/CafeMenuButton"
+        android:layout_alignEnd="@+id/CafeMenuButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+
         android:layout_alignRight="@+id/CafeMenuButton"
-        android:layout_alignEnd="@+id/CafeMenuButton"
+        android:layout_below="@+id/CafeMenuButton"
         android:background="@drawable/hub_image"
         android:clickable="true"
         android:enabled="true"
-        android:textColorHighlight="@color/secondary" />
+        android:singleLine="true"
+        android:text="Social Hub"
+        android:textColor="#FFFFFFFF"
+        android:textColorHighlight="@color/secondary"
+        android:textSize="36sp" />
 
     <Button
 
+        android:id="@+id/calenderButton"
+        fontPath="Capsuula.ttf"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:text="Calender"
-        android:id="@+id/calenderButton"
-        android:singleLine="true"
-        android:textSize="36sp"
-        android:textColor="#FFFFFFFF"
-        fontPath="Capsuula.ttf"
-        android:layout_below="@+id/tohubButton"
+        android:layout_alignEnd="@+id/tohubButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/tohubButton"
-        android:layout_alignEnd="@+id/tohubButton"
+        android:layout_below="@+id/tohubButton"
         android:background="@drawable/calendar"
         android:clickable="true"
         android:enabled="true"
-        android:textColorHighlight="@color/secondary" />
+        android:singleLine="true"
+        android:text="Calender"
+        android:textColor="#FFFFFFFF"
+        android:textColorHighlight="@color/secondary"
+        android:textSize="36sp" />
 
     <Button
+        android:id="@+id/CafeMenuButton"
         fontPath="Capsuula.ttf"
         android:layout_width="fill_parent"
         android:layout_height="75dp"
-        android:text="Cafeteria Menu"
-        android:id="@+id/CafeMenuButton"
-        android:singleLine="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="36sp"
-        android:textColor="#FFFFFFFF"
-        android:background="@drawable/cafe_image_two"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/cafe_image_two"
         android:clickable="true"
         android:enabled="true"
-        android:textColorHighlight="@color/secondary" />
+        android:singleLine="true"
+        android:text="Cafeteria Menu"
+        android:textColor="#FFFFFFFF"
+        android:textColorHighlight="@color/secondary"
+        android:textSize="36sp" />
 
     <Button
-        android:singleLine="true"
-        android:textSize="36sp"
-        android:textColor="#FFFFFFFF"
+        android:id="@+id/NewsFeed"
         fontPath="Capsuula.ttf"
         android:layout_width="fill_parent"
         android:layout_height="75dp"
-        android:text="News Feed"
-        android:id="@+id/NewsFeed"
-        android:layout_below="@+id/calenderButton"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/calenderButton"
         android:background="@drawable/news"
         android:clickable="true"
         android:enabled="true"
-        android:textColorHighlight="@color/secondary" />
+        android:singleLine="true"
+        android:text="News Feed"
+        android:textColor="#FFFFFFFF"
+        android:textColorHighlight="@color/secondary"
+        android:textSize="36sp" />
 
     <TextView
+        android:id="@+id/welcomLabel"
+        fontPath="Capsuula.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome currently it is:"
-        android:id="@+id/welcomLabel"
-        android:textSize="18sp"
         android:layout_below="@+id/NewsFeed"
         android:layout_centerHorizontal="true"
+        android:text="Welcome currently it is:"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff"
-        fontPath="Capsuula.ttf"
 
-        android:textAlignment="center" />
+        android:textSize="18sp" />
 
     <TextView
+        android:id="@+id/dateLabel"
+        fontPath="Capsuula.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Texta"
-        android:id="@+id/dateLabel"
         android:layout_below="@+id/welcomLabel"
         android:layout_centerHorizontal="true"
-        android:textSize="22dp"
-        fontPath="Capsuula.ttf"
+        android:text="Large Texta"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
 
         android:textColor="#ffffffff"
-        android:textAlignment="center"
+        android:textSize="22dp"
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        fontPath="Capsuula.ttf"
-
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="No school enjoy chrisma break"
         android:id="@+id/dayAndPeriodLabel"
+        fontPath="Capsuula.ttf"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
         android:layout_below="@+id/dateLabel"
         android:layout_centerHorizontal="true"
-        android:textSize="28sp"
-        android:textColor="#ffffffff"
-        android:textAlignment="center"
         android:singleLine="false"
+        android:text="No school enjoy chrisma break"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffffff"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
 

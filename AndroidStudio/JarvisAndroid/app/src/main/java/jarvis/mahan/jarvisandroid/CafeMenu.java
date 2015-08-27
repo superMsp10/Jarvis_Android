@@ -1,5 +1,6 @@
 package jarvis.mahan.jarvisandroid;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -202,6 +203,7 @@ public class CafeMenu extends AppCompatActivity {
 
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     void useData(JSONArray data) throws JSONException {
         menus = new JSONArray(data.toString());
         int displayHeight;
