@@ -41,6 +41,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class CafeMenu extends AppCompatActivity {
     private JSONArray menus;
+    private int[] imageIds = {R.drawable.cafe_image_one, R.drawable.cafe_image_two, R.drawable.cafe_image_three, R.drawable.cafe_image_four, R.drawable.cafe_image_five};
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -216,6 +217,7 @@ public class CafeMenu extends AppCompatActivity {
         }
         int cellHeight = displayHeight / 6;
         LinearLayout s = (LinearLayout) findViewById(R.id.CafeLinearlayout);
+        int sdk = android.os.Build.VERSION.SDK_INT;
 
         LayoutInflater inflater = LayoutInflater.from(this);
         for (int i = 0; i < data.length(); i++) {
@@ -225,6 +227,13 @@ public class CafeMenu extends AppCompatActivity {
             TextView t = (TextView) s.getChildAt(i);
             t.setId(i);
             t.getLayoutParams().height = cellHeight;
+            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+
+                t.setBackgroundDrawable(getResources().getDrawable(imageIds[i % 5]));
+            } else {
+                t.setBackground(getResources().getDrawable(imageIds[i % 5]));
+            }
+
             t.getBackground().clearColorFilter();
             t.requestLayout();
 
