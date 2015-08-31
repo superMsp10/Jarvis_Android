@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
@@ -35,6 +36,7 @@ import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -45,6 +47,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class MainActivity extends AppCompatActivity {
     private Date d;
     private SimpleDateFormat dateFormat;
+    private int mInterval = 60000;
+    private Handler mHandler;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -69,18 +73,40 @@ public class MainActivity extends AppCompatActivity {
 
 
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-       /* try {
-            d = dateFormat.parse("8 september 2015 8 49 00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
+//        try {
+//            d = dateFormat.parse("8 september 2015 8 49 00");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
         d = new Date();
 
         Calender.d = d;
         getCalcData();
+        mHandler = new Handler();
+        mStatusChecker.run();
 
 
     }
+
+
+    Runnable mStatusChecker = new Runnable() {
+        @Override
+        public void run() {
+            d = new Date();
+            float sec = dateInSeconds(d);
+            if (sec == 0 || sec == 60) {
+                mInterval = 60000;
+            } else {
+                mInterval = (int) (60000 - (sec * 1000));
+
+
+            }
+            getCalcData(); //this function can change value of mInterval.
+            //  Log.println(Log.ASSERT, "Updated Date", d.toString());
+
+            mHandler.postDelayed(mStatusChecker, mInterval);
+        }
+    };
 
     void setupUI(String dayDescription, String schedule) {
 
@@ -188,6 +214,17 @@ public class MainActivity extends AppCompatActivity {
 
         return rs;
 
+    }
+
+    float dateInSeconds(Date date) {
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+
+        float sec = c.get(Calendar.SECOND);
+
+
+        return sec;
     }
 
 
@@ -367,14 +404,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void changeToHub() {
-
-        Intent intent;
-        intent = new Intent(this, Hub.class);
-        startActivity(intent);
-
-    }
-
 
     private static void buttonEffect(View button) {
         button.setOnTouchListener(new View.OnTouchListener() {
@@ -397,10 +426,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void changeToHub() {
+
+        Intent intent;
+        intent = new Intent(this, Hub.class);
+        mHandler.removeCallbacks(mStatusChecker);
+
+        startActivity(intent);
+
+    }
+
     private void changeToCafeMenu() {
 
         Intent intent;
         intent = new Intent(this, CafeMenu.class);
+        mHandler.removeCallbacks(mStatusChecker);
+
         startActivity(intent);
 
     }
@@ -409,6 +450,8 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent;
         intent = new Intent(this, NewsFeed.class);
+        mHandler.removeCallbacks(mStatusChecker);
+
         startActivity(intent);
 
     }
@@ -421,9 +464,32 @@ public class MainActivity extends AppCompatActivity {
         String message = dateFormat.format(d);
         intent.putExtra("Date", message);
         intent.putExtra("Activity", "main");
+        mHandler.removeCallbacks(mStatusChecker);
 
         startActivity(intent);
 
+
+    }
+
+    public void onDestroy() {
+
+        super.onDestroy();
+
+        mHandler.removeCallbacks(mStatusChecker);
+    }
+
+    public void onPause() {
+
+        super.onPause();
+
+        mHandler.removeCallbacks(mStatusChecker);
+    }
+
+    public void onStop() {
+
+        super.onStop();
+
+        mHandler.removeCallbacks(mStatusChecker);
     }
 
 
