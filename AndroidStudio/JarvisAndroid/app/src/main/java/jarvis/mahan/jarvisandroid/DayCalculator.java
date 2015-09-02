@@ -72,9 +72,9 @@ class DayCalculator {
         //Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
         dateFormat = new SimpleDateFormat("EEEEE");
 
-        if (dateFormat.format(today).equals("Wednesday")) {
-            startTimes = new String[]{"10:10 AM", "11:10 AM", "12:05 AM", "1:05 PM", "2:05 PM"};
-            endTimes = new String[]{"11:05 AM", "12:05 AM", "1:00 PM", "2:00 PM", "3:00 PM"};
+        if (dateFormat.format(today).contains("Wednesday")) {
+            startTimes = new String[]{"10:10 AM", "11:10 AM", "12:05 PM", "1:05 PM", "2:05 PM"};
+            endTimes = new String[]{"11:05 AM", "12:05 PM", "1:00 PM", "2:00 PM", "3:00 PM"};
         } else {
 
             startTimes = new String[]{"8:50 AM", "10:10 AM", "11:25 AM", "12:25 PM", "1:45 PM"};

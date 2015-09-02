@@ -127,7 +127,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff"
         android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="center" />
 
 
 </RelativeLayout>
