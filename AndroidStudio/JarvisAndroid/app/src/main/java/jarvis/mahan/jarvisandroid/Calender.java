@@ -249,7 +249,7 @@ public class Calender extends AppCompatActivity {
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
         int cellHeight = displayHeight / 6;
-        LinearLayout s = (LinearLayout) findViewById(R.id.CalendarLinearlayout);
+        final LinearLayout s = (LinearLayout) findViewById(R.id.CalendarLinearlayout);
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.cafemenucell, s);
         TextView t = (TextView) s.getChildAt(0);
@@ -271,18 +271,26 @@ public class Calender extends AppCompatActivity {
                     v.invalidate();
 
 
-                } else {
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
                     v.getBackground().clearColorFilter();
                     v.invalidate();
-                    try {
-                        stringsOfDays = GetDayDiscriptions(startDate, numOfDays * 2, c);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    if (numOfDays < 365) {
+                        try {
+                            s.removeAllViews();
+                            //  Log.println(Log.ASSERT, "Number of cells ar", String.valueOf(s.getChildCount()));
+
+                            stringsOfDays = GetDayDiscriptions(startDate, numOfDays * 2, c);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
 
+                } else {
+                    v.getBackground().clearColorFilter();
+                    v.invalidate();
                 }
 
 
@@ -299,6 +307,8 @@ public class Calender extends AppCompatActivity {
         JSONArray b = new JSONArray();
         dateFormat = new SimpleDateFormat("EEEE MMM dd, ");
         cal.add(Calendar.DATE, numOfDays);
+        // Log.println(Log.ASSERT, "Number of days", String.valueOf(numOfDays));
+
         for (int i = 0; i < numOfDays + cellOffset; i++) {
             JSONObject a = new JSONObject();
             cal.add(Calendar.DATE, -1);  // number of days to add
@@ -378,6 +388,7 @@ public class Calender extends AppCompatActivity {
             b.put(a);
 
         }
+        //  Log.println(Log.ASSERT, "Number of cells", String.valueOf(s.getChildCount()));
 
         return b;
 
