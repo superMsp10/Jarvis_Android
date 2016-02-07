@@ -133,7 +133,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/loading"
+        android:id="@+id/loading_Main"
         android:nestedScrollingEnabled="true"
         android:background="#d92a2a2a"
         android:layout_gravity="center_horizontal|bottom"

@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView img = (ImageView)findViewById(R.id.loading);
+        ImageView img = (ImageView)findViewById(R.id.loading_Main);
 //        img.setBackgroundResource(R.drawable.spin_animation);
         img.setVisibility(View.VISIBLE);
         // Get the background, which has been compiled to an AnimationDrawable object.
@@ -191,9 +191,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void stopLoadingAnimaton(){
-        ImageView img = (ImageView)findViewById(R.id.loading);
+        ImageView img = (ImageView)findViewById(R.id.loading_Main);
 //        img.setBackgroundResource(R.drawable.spin_animation);
-        img.setVisibility(View.INVISIBLE);
+        img.setVisibility(View.GONE);
         // Get the background, which has been compiled to an AnimationDrawable object.
         AnimationDrawable frameAnimation = (AnimationDrawable) img.getDrawable();
 
@@ -274,10 +274,10 @@ public class MainActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
 
-        float sec = c.get(Calendar.SECOND);
 
 
-        return sec;
+
+        return c.get(Calendar.SECOND);
     }
 
 

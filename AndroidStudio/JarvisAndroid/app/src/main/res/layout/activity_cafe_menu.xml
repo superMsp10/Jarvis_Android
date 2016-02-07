@@ -13,8 +13,25 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/CafeLinearlayout">
+        android:id="@+id/CafeLinearlayout"
+        android:weightSum="1">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="267dp"
+            android:id="@+id/loading_Cafe"
+            android:nestedScrollingEnabled="true"
+            android:background="#d92a2a2a"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/NewsFeed"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/spin_animation"
+            android:layout_weight="0.33"
+            android:scaleType="center" />
     </LinearLayout>
 </ScrollView>
 
