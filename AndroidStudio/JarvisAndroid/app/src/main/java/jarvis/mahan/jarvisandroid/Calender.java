@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -89,8 +91,29 @@ public class Calender extends AppCompatActivity {
             }
 
         }*/
+        ImageView img = (ImageView)findViewById(R.id.loading_Calendar);
+//        img.setBackgroundResource(R.drawable.spin_animation);
+        img.setVisibility(View.VISIBLE);
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        AnimationDrawable frameAnimation = (AnimationDrawable) img.getDrawable();
+
+        // Start the animation (looped playback by default).
+        frameAnimation.start();
+
         getCalcData();
 
+
+    }
+
+    void stopLoadingAnimaton(){
+        ImageView img = (ImageView)findViewById(R.id.loading_Calendar);
+//        img.setBackgroundResource(R.drawable.spin_animation);
+        img.setVisibility(View.GONE);
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        AnimationDrawable frameAnimation = (AnimationDrawable) img.getDrawable();
+
+        // Start the animation (looped playback by default).
+        frameAnimation.stop();
 
     }
 
@@ -241,7 +264,7 @@ public class Calender extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        stopLoadingAnimaton();
     }
 
 
@@ -252,7 +275,7 @@ public class Calender extends AppCompatActivity {
         final LinearLayout s = (LinearLayout) findViewById(R.id.CalendarLinearlayout);
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.cafemenucell, s);
-        TextView t = (TextView) s.getChildAt(0);
+        TextView t = (TextView) s.getChildAt(1);
         t.getLayoutParams().height = cellHeight;
         t.requestLayout();
         t.setBackgroundColor(Color.rgb(102, 204, 0));
@@ -325,7 +348,7 @@ public class Calender extends AppCompatActivity {
             String f = dateDay + c.getDayDescription();
             inflater.inflate(R.layout.cafemenucell, s);
 
-            TextView txt = (TextView) s.getChildAt(i + 1);
+            TextView txt = (TextView) s.getChildAt(i + 2);
             txt.setId(i + 1);
             txt.getLayoutParams().height = cellHeight;
             txt.getBackground().clearColorFilter();

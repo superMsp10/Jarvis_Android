@@ -331,7 +331,7 @@ public class CafeMenu extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.cafemenucell, s);
 
-        TextView t = (TextView) s.getChildAt(0);
+        TextView t = (TextView) s.getChildAt(1);
         t.setId(0);
         t.getLayoutParams().height = cellHeight;
         t.setBackgroundColor(Color.rgb(102, 204, 0));

@@ -77,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
-        dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-        try {
-            d = dateFormat.parse("9 september 2015 10 11 00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        // d = new Date();
+//        dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
+//        try {
+//            d = dateFormat.parse("9 september 2015 10 11 00");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+         d = new Date();
         normalUI();
         Calender.d = d;
         getCalcData();
