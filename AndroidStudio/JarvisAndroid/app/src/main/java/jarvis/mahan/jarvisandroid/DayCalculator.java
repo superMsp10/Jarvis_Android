@@ -1,6 +1,8 @@
 package jarvis.mahan.jarvisandroid;
 
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,7 +72,7 @@ class DayCalculator {
         //  int days = daysSinceStart(today);
         // Log.println(Log.ASSERT, "Days", Integer.toString(days));
         //Log.println(Log.ASSERT, "Number of Sat and sun", Double.toString(numberOfSatAndSun(days + offset)));
-        dateFormat = new SimpleDateFormat("EEEEE");
+        dateFormat = new SimpleDateFormat("EEEE");
 
         if (dateFormat.format(today).contains("Wednesday")) {
             startTimes = new String[]{"10:10 AM", "11:10 AM", "12:05 PM", "1:05 PM", "2:05 PM"};

@@ -41,6 +41,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class NewsFeed extends AppCompatActivity {
     private JSONArray news;
+    public boolean notConnected = false;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -97,7 +98,6 @@ public class NewsFeed extends AppCompatActivity {
 
 
     void getData() {
-
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -160,9 +160,9 @@ public class NewsFeed extends AppCompatActivity {
             }
 
             private String readFromFile() {
+                notConnected = true;
 
                 String ret = "";
-
                 try {
                     InputStream inputStream = openFileInput("NewsFeed.txt");
 
@@ -199,6 +199,8 @@ public class NewsFeed extends AppCompatActivity {
 
     void useData(JSONArray data) throws JSONException {
         news = new JSONArray(data.toString());
+
+
         int displayHeight;
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
 
@@ -214,11 +216,17 @@ public class NewsFeed extends AppCompatActivity {
         LinearLayout s = (LinearLayout) findViewById(R.id.NewsFeedLinearlayout);
 
         LayoutInflater inflater = LayoutInflater.from(this);
+        int start = 0;
+        if (notConnected) {
+            noDataUI();
+            start = 1;
+        }
+
         for (int i = 0; i < data.length(); i++) {
             String name = data.getJSONObject(i).getString("Title");
             inflater.inflate(R.layout.cafemenucell, s);
 
-            TextView t = (TextView) s.getChildAt(i);
+            TextView t = (TextView) s.getChildAt(start + i);
             t.setId(i);
             t.getLayoutParams().height = cellHeight;
             t.getBackground().clearColorFilter();
@@ -252,12 +260,42 @@ public class NewsFeed extends AppCompatActivity {
             });
 
             t.setText(name);
-
         }
+
+//        Log.println(Log.ASSERT, "Data Length", String.valueOf(data.length()));
 
 
     }
 
+    void noDataUI() {
+//        Log.println(Log.ASSERT, "noDataUI", "Start");
+        int displayHeight;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+            displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        } else {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            displayHeight = size.y;
+
+        }
+        int cellHeight = displayHeight / 6;
+        LinearLayout s = (LinearLayout) findViewById(R.id.NewsFeedLinearlayout);
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.cafemenucell, s);
+
+        TextView t = (TextView) s.getChildAt(0);
+        t.setId(0);
+        t.getLayoutParams().height = cellHeight;
+        t.getBackground().clearColorFilter();
+        t.requestLayout();
+        t.setBackgroundColor(Color.rgb(102, 204, 0));
+        t.setText("Please connect to the internet for updates");
+
+
+    }
 
     void changeActivity(int index) throws JSONException {
 

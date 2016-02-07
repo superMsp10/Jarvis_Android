@@ -190,7 +190,7 @@ public class Calender extends AppCompatActivity {
 
             private String readFromFile() {
 
-                String ret = "";
+                String ret = "[{\"_id\":\"558ebe48e4b0b1da5636c1a9\",\"Month\":\"September\",\"MonthOrder\":1,\"NoSchoolDates\":[{\"Date\":1,\"Reason\":\"Summer Break\"},{\"Date\":2,\"Reason\":\"Summer Break\"},{\"Date\":3,\"Reason\":\"P.A. Day\"},{\"Date\":4,\"Reason\":\"Summer Break\"},{\"Date\":7,\"Reason\":\"Labour Day\"}]},{\"_id\":\"558f11c7e4b0b1da5636c6cd\",\"Month\":\"October\",\"MonthOrder\":2,\"NoSchoolDates\":[{\"Date\":12,\"Reason\":\"Thanks Giving\"}]},{\"_id\":\"558ef073e4b0b1da5636c4f9\",\"Month\":\"November\",\"MonthOrder\":3,\"NoSchoolDates\":[{\"Date\":13,\"Reason\":\"P.A. Day\"}]},{\"_id\":\"558ef91ee4b0b1da5636c5c1\",\"Month\":\"December\",\"MonthOrder\":4,\"NoSchoolDates\":[{\"Date\":21,\"Reason\":\"Christmas Break\"},{\"Date\":22,\"Reason\":\"Christmas Break\"},{\"Date\":23,\"Reason\":\"Christmas Break\"},{\"Date\":24,\"Reason\":\"Christmas Break\"},{\"Date\":25,\"Reason\":\"Christmas Break\"},{\"Date\":28,\"Reason\":\"Christmas Break\"},{\"Date\":29,\"Reason\":\"Christmas Break\"},{\"Date\":30,\"Reason\":\"Christmas Break\"},{\"Date\":31,\"Reason\":\"Christmas Break\"}]},{\"_id\":\"558ef9fce4b0b1da5636c5c9\",\"Month\":\"January\",\"MonthOrder\":5,\"NoSchoolDates\":[{\"Date\":1,\"Reason\":\"New Years Day\"}]},{\"_id\":\"558efa72e4b0b1da5636c5d2\",\"Month\":\"February\",\"MonthOrder\":6,\"NoSchoolDates\":[{\"Date\":12,\"Reason\":\"P.A. Day\"},{\"Date\":15,\"Reason\":\"Family Day\"}]},{\"_id\":\"558efdefe4b0b1da5636c5fc\",\"Month\":\"March\",\"MonthOrder\":7,\"NoSchoolDates\":[{\"Date\":14,\"Reason\":\"March Break\"},{\"Date\":15,\"Reason\":\"March Break\"},{\"Date\":16,\"Reason\":\"March Break\"},{\"Date\":17,\"Reason\":\"March Break\"},{\"Date\":18,\"Reason\":\"March Break\"},{\"Date\":25,\"Reason\":\"Good Friday\"},{\"Date\":28,\"Reason\":\"Easter Monday\"},{\"Date\":31,\"Reason\":\" For Some Students OSSLT, See News Feed\"}]},{\"_id\":\"558efe43e4b0b1da5636c602\",\"Month\":\"April\",\"MonthOrder\":8,\"NoSchoolDates\":[]},{\"_id\":\"558efe81e4b0b1da5636c606\",\"Month\":\"May\",\"MonthOrder\":9,\"NoSchoolDates\":[{\"Date\":23,\"Reason\":\"Victoria Day\"}]},{\"_id\":\"558efecfe4b0b1da5636c609\",\"Month\":\"June\",\"MonthOrder\":10,\"NoSchoolDates\":[{\"Date\":28,\"Reason\":\"P.A. Day\"},{\"Date\":13,\"Reason\":\"Exams\"},{\"Date\":14,\"Reason\":\"Exams\"},{\"Date\":15,\"Reason\":\"Exams\"},{\"Date\":16,\"Reason\":\"Exams\"},{\"Date\":17,\"Reason\":\"Exams\"},{\"Date\":20,\"Reason\":\"Exams\"},{\"Date\":21,\"Reason\":\"Exams\"},{\"Date\":22,\"Reason\":\"Exams\"},{\"Date\":23,\"Reason\":\"Exams\"},{\"Date\":24,\"Reason\":\"Exam Consultation Day\"},{\"Date\":27,\"Reason\":\"Exam Consultation Day\"},{\"Date\":30,\"Reason\":\"P.A. Day\"},{\"Date\":29,\"Reason\":\"Family Day\"}]},{\"_id\":\"558f1092e4b0b1da5636c6c6\",\"Month\":\"July\",\"MonthOrder\":11,\"NoSchoolDates\":[]},{\"_id\":\"558f10d0e4b0b1da5636c6c8\",\"Month\":\"August\",\"MonthOrder\":12,\"NoSchoolDates\":[{\"Date\":22,\"Reason\":\"Special Schedule\"}]}]";
 
                 try {
                     InputStream inputStream = openFileInput("Calendar.txt");
@@ -231,7 +231,7 @@ public class Calender extends AppCompatActivity {
         try {
             DayCalculator calc = new DayCalculator(data, d);
             try {
-                stringsOfDays = GetDayDiscriptions(d, nOfDays, calc);
+                stringsOfDays = GetDayDiscriptions(d, nOfDays, calc, true);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -245,7 +245,7 @@ public class Calender extends AppCompatActivity {
     }
 
 
-    private JSONArray GetDayDiscriptions(final Date startDate, final int numOfDays, final DayCalculator c) throws JSONException, ParseException {
+    private JSONArray GetDayDiscriptions(final Date startDate, final int numOfDays, final DayCalculator c, boolean scrool) throws JSONException, ParseException {
 
         int displayHeight = getWindowManager().getDefaultDisplay().getHeight();
         int cellHeight = displayHeight / 6;
@@ -280,7 +280,7 @@ public class Calender extends AppCompatActivity {
                             s.removeAllViews();
                             //  Log.println(Log.ASSERT, "Number of cells ar", String.valueOf(s.getChildCount()));
 
-                            stringsOfDays = GetDayDiscriptions(startDate, numOfDays * 2, c);
+                            stringsOfDays = GetDayDiscriptions(startDate, numOfDays * 2, c, false);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (ParseException e) {
@@ -360,21 +360,21 @@ public class Calender extends AppCompatActivity {
                     }
                 });
             }
-
-            if (f.contains(dateFormat.format(d))) {
-                txt.setBackgroundColor(Color.rgb(255, 216, 0));
-                final View today = txt;
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        int vLeft = today.getTop();
-                        int vRight = today.getBottom();
-                        int sWidth = scroll.getHeight();
-                        scroll.scrollTo(0, (vLeft + vRight - sWidth) / 2);
-                    }
-                });
+            if (scrool) {
+                if (f.contains(dateFormat.format(d))) {
+                    txt.setBackgroundColor(Color.rgb(255, 216, 0));
+                    final View today = txt;
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            int vLeft = today.getTop();
+                            int vRight = today.getBottom();
+                            int sWidth = scroll.getHeight();
+                            scroll.scrollTo(0, (vLeft + vRight - sWidth) / 2);
+                        }
+                    });
+                }
             }
-
             txt.requestLayout();
 
 

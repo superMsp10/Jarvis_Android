@@ -6,6 +6,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +17,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -74,19 +77,18 @@ public class MainActivity extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
-
         dateFormat = new SimpleDateFormat("d LLLL yyyy hh mm ss");
-//        try {
-//            d = dateFormat.parse("8 september 2015 8 49 00");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-        d = new Date();
-
+        try {
+            d = dateFormat.parse("9 september 2015 10 11 00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        // d = new Date();
+        normalUI();
         Calender.d = d;
         getCalcData();
         mHandler = new Handler();
-        mStatusChecker.run();
+       // mStatusChecker.run();
 
 
     }
@@ -104,16 +106,24 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-            getCalcData(); //this function can change value of mInterval.
-            //  Log.println(Log.ASSERT, "Updated Date", d.toString());
+            Calender.d = d;
+            getCalcData();
 
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTime(d);
+//            cal.add(Calendar.MINUTE, 45);  // number of days to add
+//            d = cal.getTime();
+//            Calender.d = d;
+//             Log.println(Log.ASSERT, "Updated Date", d.toString());
+//            getCalcData(); //this function can change value of mInterval.
             mHandler.postDelayed(mStatusChecker, mInterval);
+
+
         }
     };
 
-    void setupUI(String dayDescription, String schedule) {
 
-
+    void normalUI() {
         int displayHeight;
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
 
@@ -168,6 +178,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageView img = (ImageView)findViewById(R.id.loading);
+//        img.setBackgroundResource(R.drawable.spin_animation);
+        img.setVisibility(View.VISIBLE);
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        AnimationDrawable frameAnimation = (AnimationDrawable) img.getDrawable();
+
+        // Start the animation (looped playback by default).
+        frameAnimation.start();
+
+
+    }
+
+    void stopLoadingAnimaton(){
+        ImageView img = (ImageView)findViewById(R.id.loading);
+//        img.setBackgroundResource(R.drawable.spin_animation);
+        img.setVisibility(View.INVISIBLE);
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        AnimationDrawable frameAnimation = (AnimationDrawable) img.getDrawable();
+
+        // Start the animation (looped playback by default).
+        frameAnimation.stop();
+
+    }
+
+    void setupUI(String dayDescription, String schedule) {
+
+        int displayHeight;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+            displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        } else {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            displayHeight = size.y;
+
+        }
+        int buttonHeight = displayHeight / 6;
+
         TextView text = (TextView) findViewById(R.id.welcomLabel);
         text.getLayoutParams().height = buttonHeight / 3;
         text = (TextView) findViewById(R.id.dateLabel);
@@ -184,9 +233,10 @@ public class MainActivity extends AppCompatActivity {
         if (!dayDescription.contains("No School")) {
             text.setText(dayDescription + ", " + schedule);
         } else text.setText(dayDescription);
-
+        stopLoadingAnimaton();
 
     }
+
 
     JSONArray sortJsonArray(JSONArray start) throws JSONException {
         Integer[] arr;
@@ -252,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             res = sortJsonArray(new JSONArray(response));
                             useData(res);
-                            // Log.println(Log.ASSERT, "Response from server", res.toString());
+                            //  Log.println(Log.ASSERT, "Response from server", res.toString());
                             writeToFile(res.toString());
 
                         } catch (JSONException e) {
@@ -296,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
 
             private String readFromFile() {
 
-                String ret = "";
+                String ret = "[{\"_id\":\"558ebe48e4b0b1da5636c1a9\",\"Month\":\"September\",\"MonthOrder\":1,\"NoSchoolDates\":[{\"Date\":1,\"Reason\":\"Summer Break\"},{\"Date\":2,\"Reason\":\"Summer Break\"},{\"Date\":3,\"Reason\":\"P.A. Day\"},{\"Date\":4,\"Reason\":\"Summer Break\"},{\"Date\":7,\"Reason\":\"Labour Day\"}]},{\"_id\":\"558f11c7e4b0b1da5636c6cd\",\"Month\":\"October\",\"MonthOrder\":2,\"NoSchoolDates\":[{\"Date\":12,\"Reason\":\"Thanks Giving\"}]},{\"_id\":\"558ef073e4b0b1da5636c4f9\",\"Month\":\"November\",\"MonthOrder\":3,\"NoSchoolDates\":[{\"Date\":13,\"Reason\":\"P.A. Day\"}]},{\"_id\":\"558ef91ee4b0b1da5636c5c1\",\"Month\":\"December\",\"MonthOrder\":4,\"NoSchoolDates\":[{\"Date\":21,\"Reason\":\"Christmas Break\"},{\"Date\":22,\"Reason\":\"Christmas Break\"},{\"Date\":23,\"Reason\":\"Christmas Break\"},{\"Date\":24,\"Reason\":\"Christmas Break\"},{\"Date\":25,\"Reason\":\"Christmas Break\"},{\"Date\":28,\"Reason\":\"Christmas Break\"},{\"Date\":29,\"Reason\":\"Christmas Break\"},{\"Date\":30,\"Reason\":\"Christmas Break\"},{\"Date\":31,\"Reason\":\"Christmas Break\"}]},{\"_id\":\"558ef9fce4b0b1da5636c5c9\",\"Month\":\"January\",\"MonthOrder\":5,\"NoSchoolDates\":[{\"Date\":1,\"Reason\":\"New Years Day\"}]},{\"_id\":\"558efa72e4b0b1da5636c5d2\",\"Month\":\"February\",\"MonthOrder\":6,\"NoSchoolDates\":[{\"Date\":12,\"Reason\":\"P.A. Day\"},{\"Date\":15,\"Reason\":\"Family Day\"}]},{\"_id\":\"558efdefe4b0b1da5636c5fc\",\"Month\":\"March\",\"MonthOrder\":7,\"NoSchoolDates\":[{\"Date\":14,\"Reason\":\"March Break\"},{\"Date\":15,\"Reason\":\"March Break\"},{\"Date\":16,\"Reason\":\"March Break\"},{\"Date\":17,\"Reason\":\"March Break\"},{\"Date\":18,\"Reason\":\"March Break\"},{\"Date\":25,\"Reason\":\"Good Friday\"},{\"Date\":28,\"Reason\":\"Easter Monday\"},{\"Date\":31,\"Reason\":\" For Some Students OSSLT, See News Feed\"}]},{\"_id\":\"558efe43e4b0b1da5636c602\",\"Month\":\"April\",\"MonthOrder\":8,\"NoSchoolDates\":[]},{\"_id\":\"558efe81e4b0b1da5636c606\",\"Month\":\"May\",\"MonthOrder\":9,\"NoSchoolDates\":[{\"Date\":23,\"Reason\":\"Victoria Day\"}]},{\"_id\":\"558efecfe4b0b1da5636c609\",\"Month\":\"June\",\"MonthOrder\":10,\"NoSchoolDates\":[{\"Date\":28,\"Reason\":\"P.A. Day\"},{\"Date\":13,\"Reason\":\"Exams\"},{\"Date\":14,\"Reason\":\"Exams\"},{\"Date\":15,\"Reason\":\"Exams\"},{\"Date\":16,\"Reason\":\"Exams\"},{\"Date\":17,\"Reason\":\"Exams\"},{\"Date\":20,\"Reason\":\"Exams\"},{\"Date\":21,\"Reason\":\"Exams\"},{\"Date\":22,\"Reason\":\"Exams\"},{\"Date\":23,\"Reason\":\"Exams\"},{\"Date\":24,\"Reason\":\"Exam Consultation Day\"},{\"Date\":27,\"Reason\":\"Exam Consultation Day\"},{\"Date\":30,\"Reason\":\"P.A. Day\"},{\"Date\":29,\"Reason\":\"Family Day\"}]},{\"_id\":\"558f1092e4b0b1da5636c6c6\",\"Month\":\"July\",\"MonthOrder\":11,\"NoSchoolDates\":[]},{\"_id\":\"558f10d0e4b0b1da5636c6c8\",\"Month\":\"August\",\"MonthOrder\":12,\"NoSchoolDates\":[{\"Date\":22,\"Reason\":\"Special Schedule\"}]}]";
 
                 try {
                     InputStream inputStream = openFileInput("Calendar.txt");
@@ -335,6 +385,7 @@ public class MainActivity extends AppCompatActivity {
     void useData(JSONArray data) {
         try {
             DayCalculator calc = new DayCalculator(data, d);
+            calc.init();
             JSONObject j = new JSONObject();
             String schedule = null;
 

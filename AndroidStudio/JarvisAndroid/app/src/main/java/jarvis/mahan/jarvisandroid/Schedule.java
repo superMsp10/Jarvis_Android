@@ -74,6 +74,7 @@ public class Schedule extends AppCompatActivity {
 
 
         if (message.contains("Wednesday")) {
+
             startTimes = new String[]{"10:10 AM", "11:10 AM", "12:05 PM", "1:05 PM", "2:05 PM"};
             endTimes = new String[]{"11:05 AM", "12:05 PM", "1:00 PM", "2:00 PM", "3:00 PM"};
         } else {

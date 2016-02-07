@@ -12,7 +12,7 @@
         android:id="@+id/tohubButton"
         fontPath="Capsuula.ttf"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignEnd="@+id/CafeMenuButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -33,7 +33,7 @@
         android:id="@+id/calenderButton"
         fontPath="Capsuula.ttf"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignEnd="@+id/tohubButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -43,7 +43,7 @@
         android:clickable="true"
         android:enabled="true"
         android:singleLine="true"
-        android:text="Calender"
+        android:text="Calendar"
         android:textColor="#FFFFFFFF"
         android:textColorHighlight="@color/secondary"
         android:textSize="36sp" />
@@ -52,7 +52,7 @@
         android:id="@+id/CafeMenuButton"
         fontPath="Capsuula.ttf"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -71,7 +71,7 @@
         android:id="@+id/NewsFeed"
         fontPath="Capsuula.ttf"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/calenderButton"
@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/welcomLabel"
         android:layout_centerHorizontal="true"
-        android:text="Large Texta"
+        android:text="Connecting to the"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
 
@@ -122,13 +122,28 @@
         android:layout_below="@+id/dateLabel"
         android:layout_centerHorizontal="true"
         android:singleLine="false"
-        android:text="No school enjoy chrisma break"
+        android:text="Internet ..."
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff"
         android:textSize="28sp"
         android:textStyle="bold"
         android:gravity="center" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/loading"
+        android:nestedScrollingEnabled="true"
+        android:background="#d92a2a2a"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/NewsFeed"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/spin_animation" />
 
 
 </RelativeLayout>

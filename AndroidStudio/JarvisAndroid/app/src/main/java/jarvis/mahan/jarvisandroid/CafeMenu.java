@@ -43,6 +43,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class CafeMenu extends AppCompatActivity {
     private JSONArray menus;
     final private int[] imageIds = {R.drawable.cafe_image_one, R.drawable.cafe_image_two, R.drawable.cafe_image_three, R.drawable.cafe_image_four, R.drawable.cafe_image_five};
+    public boolean notConnected = false;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -166,9 +168,9 @@ public class CafeMenu extends AppCompatActivity {
             }
 
             private String readFromFile() {
+                notConnected = true;
 
                 String ret = "";
-
                 try {
                     InputStream inputStream = openFileInput("CafeMenu.txt");
 
@@ -222,11 +224,17 @@ public class CafeMenu extends AppCompatActivity {
         int sdk = android.os.Build.VERSION.SDK_INT;
 
         LayoutInflater inflater = LayoutInflater.from(this);
+        int start = 0;
+        if (notConnected) {
+            noDataUI();
+            start = 1;
+        }
+
         for (int i = 0; i < data.length(); i++) {
             String name = data.getJSONObject(i).getString("Date");
             inflater.inflate(R.layout.cafemenucell, s);
 
-            TextView t = (TextView) s.getChildAt(i);
+            TextView t = (TextView) s.getChildAt(start + i);
             t.setId(i);
             t.getLayoutParams().height = cellHeight;
             if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
@@ -281,6 +289,38 @@ public class CafeMenu extends AppCompatActivity {
         intent.putExtra("Menu", message);
 
         startActivity(intent);
+
+    }
+
+    void noDataUI() {
+
+        int displayHeight;
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
+
+            displayHeight = getWindowManager().getDefaultDisplay().getHeight();
+        } else {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            displayHeight = size.y;
+
+        }
+        int cellHeight = displayHeight / 6;
+        LinearLayout s = (LinearLayout) findViewById(R.id.CafeLinearlayout);
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        inflater.inflate(R.layout.cafemenucell, s);
+
+        TextView t = (TextView) s.getChildAt(0);
+        t.setId(0);
+        t.getLayoutParams().height = cellHeight;
+        t.setBackgroundColor(Color.rgb(102, 204, 0));
+
+
+        t.getBackground().clearColorFilter();
+        t.setText("Please connect to the internet for updates");
+
+        t.requestLayout();
 
     }
 
