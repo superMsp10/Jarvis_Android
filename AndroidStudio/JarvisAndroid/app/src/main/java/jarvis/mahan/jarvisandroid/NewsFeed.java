@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -61,10 +63,27 @@ public class NewsFeed extends AppCompatActivity {
                         .build()
         );
         setTitle("News Feed");
+        ImageView img = (ImageView)findViewById(R.id.Loading_News);
+//        img.setBackgroundResource(R.drawable.spin_animation);
+        img.setVisibility(View.VISIBLE);
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        AnimationDrawable frameAnimation = (AnimationDrawable) img.getDrawable();
 
+        // Start the animation (looped playback by default).
+        frameAnimation.start();
         getData();
     }
+    void stopLoadingAnimaton(){
+        ImageView img = (ImageView)findViewById(R.id.Loading_News);
+//        img.setBackgroundResource(R.drawable.spin_animation);
+        img.setVisibility(View.GONE);
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        AnimationDrawable frameAnimation = (AnimationDrawable) img.getDrawable();
 
+        // Start the animation (looped playback by default).
+        frameAnimation.stop();
+
+    }
     JSONArray sortJsonArray(JSONArray start) throws JSONException {
         Integer[] arr;
         arr = new Integer[start.length()];
@@ -216,10 +235,10 @@ public class NewsFeed extends AppCompatActivity {
         LinearLayout s = (LinearLayout) findViewById(R.id.NewsFeedLinearlayout);
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        int start = 0;
+        int start = 1;
         if (notConnected) {
             noDataUI();
-            start = 1;
+            start = 2;
         }
 
         for (int i = 0; i < data.length(); i++) {
@@ -263,7 +282,7 @@ public class NewsFeed extends AppCompatActivity {
         }
 
 //        Log.println(Log.ASSERT, "Data Length", String.valueOf(data.length()));
-
+    stopLoadingAnimaton();
 
     }
 
